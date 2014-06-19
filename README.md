@@ -1,4 +1,10 @@
 docker-brew-gentoo
 ==================
 
-Common effort to get an official and automated gentoo base docker container
+We're working on getting an AMD64 automated build atm, all help welcome !
+
+
+Contribue
+=========
+
+Join #gentoo-docker on FreeNode IRC and ping us with your ideas !
