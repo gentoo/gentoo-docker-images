@@ -31,4 +31,5 @@ ONBUILD RUN echo "masters = gentoo" > /usr/portage/metadata/layout.conf
 ONBUILD RUN emerge-webrsync -q
 ONBUILD RUN eselect news read new
 # Finalization
+ONBUILD RUN emerge --config sys-libs/timezone-data
 ONBUILD RUN env-update
