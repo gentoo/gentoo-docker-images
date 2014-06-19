@@ -29,5 +29,6 @@ ONBUILD RUN chown -R portage:portage /usr/portage
 ONBUILD RUN echo "masters = gentoo" > /usr/portage/metadata/layout.conf
 # Sync portage
 ONBUILD RUN emerge-webrsync -q
+ONBUILD RUN eselect news read new
 # Finalization
 ONBUILD RUN env-update
