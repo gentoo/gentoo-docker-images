@@ -29,5 +29,11 @@ ONBUILD RUN chown -R portage:portage /usr/portage
 ONBUILD RUN echo "masters = gentoo" > /usr/portage/metadata/layout.conf
 # Sync portage
 ONBUILD RUN emerge-webrsync -q
+ONBUILD RUN eselect news read new
 # Finalization
+ONBUILD RUN emerge --config sys-libs/timezone-data
+ONBUILD RUN echo en_US ISO-8859-1 > /etc/locale.gen
+ONBUILD RUN echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
+ONBUILD RUN locale-gen
+ONBUILD RUN echo 'LANG="en_US.UTF-8"' >> /etc/env.d/02locale
 ONBUILD RUN env-update
