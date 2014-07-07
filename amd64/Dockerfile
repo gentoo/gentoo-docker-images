@@ -1,6 +1,6 @@
 FROM scratch
 
-MAINTAINER Gentoo_Community
+MAINTAINER Gentoo Docker Team
 
 # This one should be present by running the build.sh script
 ADD stage3-amd64.tar.xz /
