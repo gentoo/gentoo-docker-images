@@ -1,10 +1,14 @@
-docker-brew-gentoo
-==================
+# Gentoo Docker Images
 
-We're working on getting an AMD64 automated build atm, all help welcome!
+A repository of Dockerfiles and utilities for generating Gentoo docker images.
 
+Currently we are working on adding amd64 images and will expand into other
+arches over time.
 
-Contribute
-==========
+## Inventory
 
-Join #gentoo-docker on FreeNode IRC and ping us with your ideas!
+* portage
+
+# Contributing
+
+Join us at irc://freenode.net/#gentoo-containers.  We'd love to hear any ideas.
