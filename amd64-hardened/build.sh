@@ -1,26 +1,30 @@
-#!/bin/bash
+stage3_suffix="-hardened"
+dist="http://distfiles.gentoo.org/releases/amd64/autobuilds"
+stage3="$(busybox wget -qO- $dist/latest-stage3-amd64${suffix}.txt | busybox tail -n 1)"
 
-die(){ echo "$@" 1>&2; exit 1; }
+busybox echo "Downloading and extracting ${stage3}..."
+busybox wget "${dist}/${stage3}" -qO- \
+  | busybox tar \
+    --exclude="./etc/hosts" \
+    --exclude="./sys/*" \
+    -pxjf -
 
-base_url="http://distfiles.gentoo.org/releases/amd64/autobuilds"
+# Setup the rc_sys
+sed -e 's/#rc_sys=""/rc_sys="lxc"/g' -i /etc/rc.conf
 
-latest_stage3=$(curl "${base_url}/latest-stage3-amd64-hardened.txt" 2>/dev/null | grep -v '#')
-stage3=$(basename "${latest_stage3}")
+# Setup the net.lo runlevel
+ln -s /etc/init.d/net.lo /run/openrc/started/net.lo
 
-[ ! -f "${stage3}" ] && xz=true || xz=false
+# Setup the net.eth0 runlevel
+ln -s /etc/init.d/net.lo /etc/init.d/net.eth0
+ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 
-wget -nc "${base_url}/${latest_stage3}" || die "Could not download stage3"
-wget -nc "${base_url}/${latest_stage3}.DIGESTS.asc" || die "Could not download digests"
-wget -nc "${base_url}/${latest_stage3}.CONTENTS" || die "Could not download contents"
-sha512_digests=$(grep -A1 SHA512 "${stage3}.DIGESTS.asc" | grep -v '^--')
-gpg --verify "${stage3}.DIGESTS.asc" || die "Insecure digests"
-echo "${sha512_digests}" | sha512sum -c || die "Checksum validation failed"
+# By default, UTC system
+echo 'UTC' > /etc/timezone
 
-if [ ${xz} == true ] || [ ! -f stage3-amd64.tar.xz ]; then
-	echo "Transforming bz2 tarball to xz (golang bug). This will take some time..."
-	bunzip2 -c "${stage3}" | xz -z > stage3-amd64-hardened.tar.xz || die "Failed to recompress to xz"
-fi
-echo "I'm done with the stage3."
+# Self destruct
+rm /Dockerfile
+rm /build.sh
 
-echo "Building docker Gentoo image now..."
-docker build -t gentoo:latest-hardened .
+echo "Bootstrapped ${stage3} into /:"
+ls --color -lah
