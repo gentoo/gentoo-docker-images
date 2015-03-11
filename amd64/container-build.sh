@@ -5,8 +5,9 @@ stage3="$(wget -O- ${dist}/latest-stage3-amd64${suffix}.txt | tail -n 1 | cut -f
 mkdir newWorldOrder; cd newWorldOrder
 echo "Downloading and extracting ${stage3}..."
 #wget -c "${dist}/${stage3}"
-cp /container/amd64/stage3-amd64-20150305.tar.bz2 .
+cp /container/stage3-amd64-20150305.tar.bz2 .
 bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xvf -
+rm -f $(basename ${stage3})
 #wget http://www.busybox.net/downloads/binaries/latest/busybox-x86_64
 cp /container/busybox-x86_64 /busybox
 chmod +x /busybox
@@ -15,7 +16,13 @@ chmod +x /busybox
 /busybox mv -f lib32 /
 /busybox mv -f lib /
 /busybox mv -f * /
-#rm -rf /lib /lib64 /usr/bin /bin
+/busybox cp -raf etc/* /etc/
+#/busybox wget http://ftp.vectranet.pl/gentoo/releases/snapshots/current/portage-latest.tar.xz
+/busybox cp /container/portage-latest.tar.xz .
+/busybox xzcat portage-latest.tar.xz | tar -C /usr/ -xvf -
+cd /
+#commit suecide
+/busybox rm -rf newWorldOrder /busybox /container-build.sh /portage-latest.tar.xz
 #cp -rafld lib64 lib lib32 bin /
 
 #busybox chroot ./
