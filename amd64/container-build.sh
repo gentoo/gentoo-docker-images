@@ -1,25 +1,25 @@
 stage3_suffix="" # e.g. -hardened
 dist="http://ftp.vectranet.pl/gentoo/releases/amd64/autobuilds/"
-stage3="$(wget -O- ${dist}/latest-stage3-amd64${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
+stage3="$(wget -q -O- ${dist}/latest-stage3-amd64${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
 
 mkdir newWorldOrder; cd newWorldOrder
 echo "Downloading and extracting ${stage3}..."
-wget -c "${dist}/${stage3}"
+wget -q -c "${dist}/${stage3}"
 #cp /container/stage3-amd64-20150305.tar.bz2 .
-bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xvf -
+bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
 rm -f $(basename ${stage3})
-wget -O /busybox http://www.busybox.net/downloads/binaries/latest/busybox-x86_64
+wget -q -O /busybox http://www.busybox.net/downloads/binaries/latest/busybox-x86_64
 #cp /container/busybox-x86_64 /busybox
 chmod +x /busybox
-/busybox rm -rf /lib64 /lib /lib32 /usr /var /bin /sbin /opt /mnt /media /root
+/busybox rm -rf /lib64 /lib /lib32 /usr /var /bin /sbin /opt /mnt /media /root /home /run /tmp
 /busybox mv -f lib64 /
 /busybox mv -f lib32 /
 /busybox mv -f lib /
 /busybox mv -f * /
 /busybox cp -raf etc/* /etc/
-/busybox wget http://ftp.vectranet.pl/gentoo/releases/snapshots/current/portage-latest.tar.xz
+/busybox wget -q -c http://ftp.vectranet.pl/gentoo/releases/snapshots/current/portage-latest.tar.xz
 #/busybox cp /container/portage-latest.tar.xz .
-/busybox xzcat portage-latest.tar.xz | tar -C /usr/ -xvf -
+/busybox xzcat portage-latest.tar.xz | tar -C /usr/ -xf -
 cd /
 #commit suicide
 /busybox rm -rf newWorldOrder /busybox /container-build.sh /portage-latest.tar.xz
