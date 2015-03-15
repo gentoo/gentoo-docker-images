@@ -1,4 +1,4 @@
-suffix="" # e.g. -hardened
+suffix="-hardened" # e.g. -hardened
 arch="amd64"
 busybox_version="x86_64"
 dist="http://distfiles.gentoo.org/releases/${arch}/autobuilds/"
