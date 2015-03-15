@@ -1,5 +1,5 @@
 stage3_suffix="" # e.g. -hardened
-dist="http://distfiles.gentoo.org/gentoo/releases/amd64/autobuilds/"
+dist="http://distfiles.gentoo.org/releases/amd64/autobuilds/"
 stage3="$(wget -q -O- ${dist}/latest-stage3-amd64${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
 
 mkdir newWorldOrder; cd newWorldOrder
@@ -15,7 +15,7 @@ chmod +x /busybox
 /busybox mv -f lib64 /
 /busybox mv -f lib32 /
 /busybox mv -f lib /
-/busybox mv -f * /
+/busybox mv -f bin boot home media mnt opt root run sbin tmp usr var /
 /busybox cp -raf etc/* /etc/
 #/busybox wget -q -c http://distfiles.gentoo.org/gentoo/releases/snapshots/current/portage-latest.tar.xz
 ##/busybox cp /container/portage-latest.tar.xz .
