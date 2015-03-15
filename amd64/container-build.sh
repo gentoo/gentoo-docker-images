@@ -1,5 +1,5 @@
 stage3_suffix="" # e.g. -hardened
-dist="http://ftp.vectranet.pl/gentoo/releases/amd64/autobuilds/"
+dist="http://distfiles.gentoo.org/gentoo/releases/amd64/autobuilds/"
 stage3="$(wget -q -O- ${dist}/latest-stage3-amd64${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
 
 mkdir newWorldOrder; cd newWorldOrder
@@ -17,9 +17,9 @@ chmod +x /busybox
 /busybox mv -f lib /
 /busybox mv -f * /
 /busybox cp -raf etc/* /etc/
-/busybox wget -q -c http://ftp.vectranet.pl/gentoo/releases/snapshots/current/portage-latest.tar.xz
-#/busybox cp /container/portage-latest.tar.xz .
-/busybox xzcat portage-latest.tar.xz | tar -C /usr/ -xf -
+#/busybox wget -q -c http://distfiles.gentoo.org/gentoo/releases/snapshots/current/portage-latest.tar.xz
+##/busybox cp /container/portage-latest.tar.xz .
+#/busybox xzcat portage-latest.tar.xz | tar -C /usr/ -xf -
 cd /
 #commit suicide
 /busybox rm -rf newWorldOrder /busybox /container-build.sh /portage-latest.tar.xz
