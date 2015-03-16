@@ -1,4 +1,4 @@
-FROM gentoofrombusybox:latest
+FROM amd64:latest
 MAINTAINER Gentoo Container Team <containers@gentoo.org>
 
 #ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
