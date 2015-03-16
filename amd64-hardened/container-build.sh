@@ -14,10 +14,10 @@ wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${
 #cp "/container/busybox-${busybox_version}" /busybox
 chmod +x /busybox
 /busybox rm -rf /lib* /usr /var /bin /sbin /opt /mnt /media /root /home /run /tmp
-/busybox mv -f lib* /
-/busybox mv -f bin boot home media mnt opt root run sbin tmp usr var /
-/busybox cp -raf etc/* /etc/
-#/busybox wget -q -c http://distfiles.gentoo.org/gentoo/releases/snapshots/current/portage-latest.tar.xz
+/busybox cp -fRap lib* /
+/busybox cp -fRap bin boot home media mnt opt root run sbin tmp usr var /
+/busybox cp -fRap etc/* /etc/
+#/busybox wget -q -c http://distfiles.gentoo.org/releases/snapshots/current/portage-latest.tar.xz
 ##/busybox cp /container/portage-latest.tar.xz .
 #/busybox xzcat portage-latest.tar.xz | tar -C /usr/ -xf -
 cd /
