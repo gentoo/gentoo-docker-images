@@ -42,8 +42,7 @@ ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 echo 'UTC' > /etc/timezone
 
 # Self destruct
-rm /Dockerfile
-rm /build.sh
+rm -f /Dockerfile /build.sh container-build.sh
 
 echo "Bootstrapped ${stage3} into /:"
 ls --color -lah
