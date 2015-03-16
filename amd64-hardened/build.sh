@@ -4,7 +4,7 @@ die(){ echo "$@" 1>&2; exit 1; }
 
 base_url="http://distfiles.gentoo.org/releases/amd64/autobuilds"
 
-latest_stage3=$(curl "${base_url}/latest-stage3-amd64-hardened.txt" 2>/dev/null | grep -v '#')
+latest_stage3=$(curl "${base_url}/latest-stage3-amd64-hardened.txt" 2>/dev/null | grep -v '#' | awk '{print $1}')
 stage3=$(basename "${latest_stage3}")
 
 [ ! -f "${stage3}" ] && xz=true || xz=false
