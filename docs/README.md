@@ -9,6 +9,8 @@
 
 For more information about this image and its history, please see the [relevant manifest file (`gentoo/gentoo-docker-images`)](https://github.com/ChaosEngine/gentoo-docker-images) or in official, the [`gentoo/gentoo-docker-images` GitHub repo](https://github.com/gentoo/gentoo-docker-images).
 
+![logo](https://raw.githubusercontent.com/ChaosEngine/gentoo-docker-images/master/docs/logo.png)
+
 # What is [Gentoo](http://www.gentoo.org/)?
 
 Gentoo is a free operating system based on either Linux or FreeBSD that can be automatically optimized and customized for just about any application or need. Extreme configurability, performance and a top-notch user and developer community are all hallmarks of the Gentoo experience.
@@ -29,7 +31,6 @@ Portage also keeps your system up-to-date. Typing emerge -uD world -- one comman
 
 > [http://en.wikipedia.org/wiki/Gentoo_Linux](http://en.wikipedia.org/wiki/Gentoo_Linux)
 
-![logo](https://raw.githubusercontent.com/ChaosEngine/gentoo-docker-images/master/docs/logo.png)
 
 # About this image
 
@@ -41,8 +42,8 @@ The same applies to amd64-hardened images.
 
 The mirror of choice for these images is [http://distfiles.gentoo.org/releases/amd64/autobuilds/](http://distfiles.gentoo.org/releases/amd64/autobuilds/) so that it's as close to optimal for everyone as possible, regardless of location.
 
-	[amd64](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/)
-	[amd64-hardened](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/)
+[amd64](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/)
+[amd64-hardened](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/)
 
 # Supported Docker versions
 
