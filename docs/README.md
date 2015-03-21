@@ -43,6 +43,7 @@ The same applies to amd64-hardened images.
 The mirror of choice for these images is [http://distfiles.gentoo.org/releases/amd64/autobuilds/](http://distfiles.gentoo.org/releases/amd64/autobuilds/) so that it's as close to optimal for everyone as possible, regardless of location.
 
 [amd64](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/)
+
 [amd64-hardened](http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/)
 
 # Supported Docker versions
