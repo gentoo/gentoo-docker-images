@@ -1,6 +1,6 @@
-suffix="-hardened" # e.g. -hardened
-arch="amd64"
-busybox_version="x86_64"
+suffix=$3 # e.g. -hardened
+arch=$1
+busybox_version=$2
 dist="http://distfiles.gentoo.org/releases/${arch}/autobuilds/"
 stage3="$(wget -q -O- ${dist}/latest-stage3-${arch}${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
 
@@ -15,11 +15,9 @@ chmod +x /busybox
 /busybox cp -fRap lib* /
 /busybox cp -fRap bin boot home media mnt opt root run sbin tmp usr var /
 /busybox cp -fRap etc/* /etc/
-#/busybox wget -q -c http://distfiles.gentoo.org/releases/snapshots/current/portage-latest.tar.xz
-#/busybox xzcat portage-latest.tar.xz | tar -C /usr/ -xf -
 cd /
 #commit suicide
-/busybox rm -rf newWorldOrder /busybox /container-build.sh /portage-latest.tar.xz /linuxrc
+/busybox rm -rf newWorldOrder /busybox /container-build.sh /linuxrc
 
 
 
