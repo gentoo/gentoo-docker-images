@@ -1,4 +1,4 @@
-FROM 32bit/ubuntu:14.04
+FROM 32bit/debian:jessie
 
 MAINTAINER Gentoo Docker Team
 
@@ -8,6 +8,6 @@ MAINTAINER Gentoo Docker Team
 ADD container-build.sh /
 
 RUN apt-get update && apt-get install -y \
-	wget
+	wget bzip2
 
 RUN /container-build.sh x86 i686
