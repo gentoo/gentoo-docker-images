@@ -1,26 +1,29 @@
-#!/bin/bash
+suffix=$3 # e.g. -hardened
+arch=$1
+busybox_version=$2
+dist="http://distfiles.gentoo.org/releases/${arch}/autobuilds/"
+stage3="$(wget -q -O- ${dist}/latest-stage3-${arch}${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
 
-die(){ echo "$@" 1>&2; exit 1; }
+mkdir newWorldOrder; cd newWorldOrder
+echo "Downloading and extracting ${stage3}..."
+wget -q -c "${dist}/${stage3}"
+bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
+rm -f $(basename ${stage3})
+wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${busybox_version}"
+chmod +x /busybox
+/busybox rm -rf /lib* /usr /var /bin /sbin /opt /mnt /media /root /home /run /tmp
+/busybox cp -fRap lib* /
+/busybox cp -fRap bin boot home media mnt opt root run sbin tmp usr var /
+/busybox cp -fRap etc/* /etc/
+cd /
+#commit suicide
+/busybox rm -rf newWorldOrder /busybox /build.sh /linuxrc
 
-base_url="http://distfiles.gentoo.org/releases/amd64/autobuilds"
 
-latest_stage3=$(curl "${base_url}/latest-stage3-amd64.txt" 2>/dev/null | grep -v '#' | tail -n1 | cut -f 1 -d ' ')
-stage3=$(basename "${latest_stage3}")
 
-[ ! -f "${stage3}" ] && xz=true || xz=false
 
-wget -nc "${base_url}/${latest_stage3}" || die "Could not download stage3"
-wget -nc "${base_url}/${latest_stage3}.DIGESTS.asc" || die "Could not download digests"
-wget -nc "${base_url}/${latest_stage3}.CONTENTS" || die "Could not download contents"
-sha512_digests=$(grep -A1 SHA512 "${stage3}.DIGESTS.asc" | grep -v '^--')
-gpg --verify "${stage3}.DIGESTS.asc" || die "Insecure digests"
-echo "${sha512_digests}" | sha512sum -c || die "Checksum validation failed"
+# Self destruct
+rm -f /Dockerfile /build.sh
 
-if [ ${xz} == true ] || [ ! -f stage3-amd64.tar.xz ]; then
-	echo "Transforming bz2 tarball to xz (golang bug). This will take some time..."
-	bunzip2 -c "${stage3}" | xz -z > stage3-amd64.tar.xz || die "Failed to recompress to xz"
-fi
-echo "I'm done with the stage3."
-
-echo "Building docker Gentoo image now..."
-docker build -t gentoo .
+echo "Bootstrapped ${stage3} into /:"
+ls --color -lah
