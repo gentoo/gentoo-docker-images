@@ -4,5 +4,4 @@
 *.DIGESTS
 *.CONTENTS
 *.swp
-busybox-x86_64
-busybox
+busybox*
