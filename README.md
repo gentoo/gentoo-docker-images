@@ -5,6 +5,10 @@ A repository of Dockerfiles and utilities for generating Gentoo docker images.
 Currently we are working on adding amd64 images and will expand into other
 arches over time.
 
+# DockerHub
+
+https://registry.hub.docker.com/u/gentoo/stage3-amd64/
+
 ## Inventory
 
 * portage
