@@ -1,9 +1,10 @@
 # Gentoo Docker Images
 
-A repository of Dockerfiles and utilities for generating Gentoo docker images.
+A collection of Dockerfiles for generating Gentoo docker images.
 
-Currently we are working on adding amd64 images and will expand into other
-arches over time.
+These images are intended to be created automatically by
+[docker hub](https://hub.docker.com/u/gentoo/dashboard/) and include basic
+stage3 images and an image usable as a `/usr/portage` volume.
 
 # DockerHub
 
@@ -12,10 +13,19 @@ https://registry.hub.docker.com/u/gentoo/stage3-amd64/
 ## Inventory
 
 * portage
+* stage3
+  * stage3-amd64
+    * stage3-adm64-hardened
+    * stage3-amd64-nomultilib
 
 # Contributing
 
-Join us at irc://freenode.net/#gentoo-containers.  We'd love to hear any ideas.
+We'd love to hear any ideas.  Feel free to contact us via any of the following
+methods:
+
+* IRC: irc://freenode.net/#gentoo-containers
+* EMAIL: gentoo-containers@lists.gentoo.org
+* GITHUB: https://github.com/gentoo/gentoo-docker-images
 
 ## Policy
 
