@@ -5,7 +5,9 @@ MAINTAINER Gentoo Docker Team
 # This one should be present by running the build.sh script
 ADD build.sh /
 
-RUN /build.sh amd64 x86_64 -hardened
+RUN chmod +x /build.sh
+
+RUN ./build.sh amd64 x86_64 -hardened
 
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
