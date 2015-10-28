@@ -1,5 +1,5 @@
-suffix=$3 # e.g. -hardened
-arch=$1
+#suffix=$3 # e.g. -hardened
+#arch=$1
 busybox_version=$2
 
 # http://distfiles.gentoo.org/releases/x86/autobuilds/latest-stage3-i686-hardened.txt
