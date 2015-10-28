@@ -19,10 +19,8 @@ cd /
 #commit suicide
 /busybox rm -rf newWorldOrder /busybox /build.sh /linuxrc
 
-
-latest_stage3=$(curl "${base_url}/latest-stage3-amd64.txt" 2>/dev/null | grep -v '#' | awk '{print $1}')
+latest_stage3=$(curl "${base_url}/latest-stage3-${arch}${suffix}.txt" 2>/dev/null | grep -v '#' | awk '{print $1}')
 stage3=$(basename "${latest_stage3}")
-
 
 # Self destruct
 rm -f /Dockerfile /build.sh
