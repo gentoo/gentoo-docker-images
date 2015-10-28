@@ -58,7 +58,7 @@ Support for older versions (down to 1.0) is provided on a best-effort basis.
 
 If you have any problems with or questions about this image, please contact us through a [GitHub issue](https://github.com/gentoo/gentoo-docker-images/issues).
 
-You can also reach many of the official image maintainers via the `#gentoo-contain` IRC channel on [Freenode](https://freenode.net).
+You can also reach many of the official image maintainers via the `#gentoo-containers` IRC channel on [Freenode](https://freenode.net).
 
 ## Contributing
 
