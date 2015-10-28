@@ -21,7 +21,6 @@ stage3="$(basename ${stage3path})"
 
 # Create working directory, keep a copy of busybox handy
 mkdir newWorldOrder; cd newWorldOrder
-<<<<<<< HEAD
 cp /bin/busybox .
 
 echo "Downloading and extracting ${stage3path}..."
