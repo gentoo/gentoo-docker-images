@@ -1,11 +1,8 @@
 # First param is package tarball, 2nd is the *.DIGEST file
 VerifyShaOfStage3()
 {
-	#echo $1 $2
-	#ls -l $1 $2
 	test_sum=$(awk -v myvar="$1" '$2==myvar {for(i=1; i<=1; i++) { print $1; exit}}' $2)
 	calculated_sum=$(sha512sum $1 | awk '{print $1}' -)
-	#echo aaaa $test_sum bbb $calculated_sum
 	if [[ "$test_sum" == "$calculated_sum" ]]; then
 		return 0
 	else
