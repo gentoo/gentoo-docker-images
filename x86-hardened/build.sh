@@ -1,4 +1,4 @@
-suffix=$3 # e.g. -hardened
+suffix=hardened
 arch=$1
 busybox_version=$2
 dist="http://distfiles.gentoo.org/releases/${arch}/autobuilds/"
