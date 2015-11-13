@@ -9,6 +9,11 @@ echo "Downloading and extracting ${stage3}..."
 wget -q -c "${dist}/${stage3}"
 bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
 rm -f $(basename ${stage3})
+#Add portage
+ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
+RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
+RUN mkdir -p  usr/portage/distfiles usr/portage/metadata /usr/portage/packages
+#Busy Box
 wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${busybox_version}"
 chmod +x /busybox
 /busybox rm -rf /lib* /usr /var /bin /sbin /opt /mnt /media /root /home /run /tmp
@@ -18,9 +23,6 @@ chmod +x /busybox
 cd /
 #commit suicide
 /busybox rm -rf newWorldOrder /busybox /build.sh /linuxrc
-
-
-
 
 # Self destruct
 rm -f /Dockerfile /build.sh
