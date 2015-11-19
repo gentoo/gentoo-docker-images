@@ -38,4 +38,6 @@ RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
 VOLUME /usr/portage
 #Add Layman
 Run emerge --sync
-Run Emerge git layman potage
+RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
+Run Emerge -v git layman potage
+Run Emerge -v sys-fs/squashfs-tools app-arch/p7zip
