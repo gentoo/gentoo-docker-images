@@ -13,8 +13,8 @@ RUN bzcat /stage3-i686-hardened-20151117.tar.bz2 | tar -xf - -C /
 RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
 RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
 
-RUN RM /portage-latest.tar.bz2
-RUN RM /stage3-i686-hardened-20151117.tar.bz2
+RUN rm /portage-latest.tar.bz2
+RUN rm /stage3-i686-hardened-20151117.tar.bz2
 #Add Layman
 Run emerge --sync
 RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
