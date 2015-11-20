@@ -9,7 +9,7 @@ RUN wget -q -c http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage
 
 RUN wget -q -c  http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
 
-RUN tar xvjpf stage3-*.tar.bz2 --xattrs /
+RUN tar xvjpf stage3-*.tar.bz2 
 
 RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
 RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
