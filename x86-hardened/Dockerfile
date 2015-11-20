@@ -1,41 +1,18 @@
-FROM 32bit/debian:jessie
+FROM necrose99/gentoo-docker-x86
+# Hardend dont wana build the normal Way so OVERLAY it on a good Gentoo,
+MAINTAINER   Necrose99 #Gentoo Docker Team
 
-MAINTAINER Gentoo Docker Team
-
-#ADD http://www.busybox.net/downloads/binaries/latest/busybox-i686 /busybox
-
-# This one should be present by running the build.sh script
-ADD build.sh /
-
-RUN apt-get update && apt-get install -y \
-	wget bzip2
-
-RUN /build.sh x86 i686-hardend
-
-# Setup the (virtually) current runlevel
-RUN echo "default" > /run/openrc/softlevel
-
-# Setup the rc_sys
-RUN sed -e 's/#rc_sys=""/rc_sys="lxc"/g' -i /etc/rc.conf
-
-# Setup the net.lo runlevel
-RUN ln -s /etc/init.d/net.lo /run/openrc/started/net.lo
-
-# Setup the net.eth0 runlevel
-RUN ln -s /etc/init.d/net.lo /etc/init.d/net.eth0
-RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
-
-# By default, UTC system
-RUN echo 'UTC' > /etc/timezone
 
 #Add portage
+ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686-hardened/stage3-i686-hardened-20151117.tar.bz2
 ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
+RUN bzcat /stage3-i686-hardened-20151117.tar.bz2 | tar -xf - -C /
 
-RUN mkdir -p /usr
 RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
 RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
 
-VOLUME /usr/portage
+RUN RM /portage-latest.tar.bz2
+RUN RM /portage-latest.tar.bz2
 #Add Layman
 Run emerge --sync
 RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
