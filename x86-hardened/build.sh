@@ -10,9 +10,9 @@ wget -q -c "${dist}/${stage3}"
 bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
 rm -f $(basename ${stage3})
 #Add portage
-ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
-RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
-RUN mkdir -p  usr/portage/distfiles usr/portage/metadata /usr/portage/packages
+wget -q -c  http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
+bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
+mkdir -p  usr/portage/distfiles usr/portage/metadata /usr/portage/packages
 #Busy Box
 wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${busybox_version}"
 chmod +x /busybox
