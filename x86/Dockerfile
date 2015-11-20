@@ -27,3 +27,16 @@ RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 
 # By default, UTC system
 RUN echo 'UTC' > /etc/timezone
+
+#Add portage
+ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
+RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
+RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
+
+RUN RM /portage-latest.tar.bz2
+
+#Add Layman
+Run emerge --sync
+RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
+Run Emerge -v git layman potage
+Run Emerge -v sys-fs/squashfs-tools app-arch/p7zip
