@@ -10,10 +10,10 @@ wget -q -c "${dist}/${stage3}"
 bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
 rm -f $(basename ${stage3})
 #Add portage
-wget -q -c  http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
-bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
-mkdir -p  usr/portage/distfiles usr/portage/metadata /usr/portage/packages
-RM /portage-latest.tar.bz2
+wget -q -c  http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
+bzcat /newWorldOrder/portage-latest.tar.bz2 | tar -xf - -C /newWorldOrder/usr
+mkdir -p usr/portage/distfiles usr/portage/metadata /usr/portage/packages
+
 #Busy Box
 wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${busybox_version}"
 chmod +x /busybox
@@ -30,7 +30,7 @@ rm -f /Dockerfile /build.sh
 
 echo "Bootstrapped ${stage3} into /:"
 ls --color -lah
-Run emerge --sync
-RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
-Run Emerge -v git layman potage
-Run Emerge -v sys-fs/squashfs-tools app-arch/p7zip
+emerge --sync
+emerge -v =dev-lang/python-2* =dev-lang/python-3* 
+Emerge -v git layman potage
+Emerge -v sys-fs/squashfs-tools app-arch/p7zip
