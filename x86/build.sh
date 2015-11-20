@@ -1,4 +1,4 @@
-suffix=$3 # e.g. -hardened
+suffix=hardened
 arch=$1
 busybox_version=$2
 dist="http://distfiles.gentoo.org/releases/${arch}/autobuilds/"
@@ -10,9 +10,10 @@ wget -q -c "${dist}/${stage3}"
 bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
 rm -f $(basename ${stage3})
 #Add portage
-ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
-RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
-RUN mkdir -p  usr/portage/distfiles usr/portage/metadata /usr/portage/packages
+wget -q -c  http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
+bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
+mkdir -p  usr/portage/distfiles usr/portage/metadata /usr/portage/packages
+RM /portage-latest.tar.bz2
 #Busy Box
 wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${busybox_version}"
 chmod +x /busybox
@@ -29,3 +30,7 @@ rm -f /Dockerfile /build.sh
 
 echo "Bootstrapped ${stage3} into /:"
 ls --color -lah
+Run emerge --sync
+RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
+Run Emerge -v git layman potage
+Run Emerge -v sys-fs/squashfs-tools app-arch/p7zip
