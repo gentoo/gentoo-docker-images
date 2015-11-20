@@ -32,7 +32,3 @@ rm -f /Dockerfile /build.sh
 
 echo "Bootstrapped ${stage3} into /:"
 ls --color -lah
-emerge --sync
-emerge -v =dev-lang/python-2* =dev-lang/python-3* 
-Emerge -v git layman potage
-Emerge -v sys-fs/squashfs-tools app-arch/p7zip
