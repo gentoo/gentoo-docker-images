@@ -4,9 +4,9 @@ MAINTAINER   Necrose99 #Gentoo Docker Team
 
 
 #Add portage
-RUN wget http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686-hardened/stage3-i686-hardened-20151117.tar.bz2
+RUN wget -q -c http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686-hardened/stage3-i686-hardened-20151117.tar.bz2
 ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686-hardened/stage3-i686-hardened-20151117.tar.bz2
-RUN wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
+RUN wget -q -c  http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
 ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
 RUN bzcat /stage3-i686-hardened-20151117.tar.bz2 | tar -xf - -C /
 
