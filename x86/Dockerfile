@@ -32,8 +32,7 @@ RUN echo 'UTC' > /etc/timezone
 ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
 RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
 RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
-
-RUN RM /portage-latest.tar.bz2
+RUN rm /portage-latest.tar.bz2
 
 #Add Layman
 Run emerge --sync
