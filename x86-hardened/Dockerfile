@@ -51,4 +51,3 @@ Run emerge --sync
 RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
 RUN Emerge -v git layman potage
 RUN  Emerge -v sys-fs/squashfs-tools app-arch/p7zip
->>>>>>> origin/master
