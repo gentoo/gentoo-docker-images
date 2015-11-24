@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 FROM 32bit/debian:jessie
 
 MAINTAINER Gentoo Docker Team
@@ -11,7 +10,7 @@ ADD build.sh /
 RUN apt-get update && apt-get install -y \
 	wget bzip2
 
-RUN /build.sh x86 i686-hardened
+RUN /build.sh x86
 
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
