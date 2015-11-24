@@ -2,7 +2,7 @@ FROM 32bit/debian:jessie
 
 MAINTAINER Gentoo Docker Team
 
-#ADD http://www.busybox.net/downloads/binaries/latest/busybox-i686 /busybox
+ADD http://www.busybox.net/downloads/binaries/latest/busybox-i686 /busybox
 
 # This one should be present by running the build.sh script
 ADD build.sh /
@@ -10,7 +10,7 @@ ADD build.sh /
 RUN apt-get update && apt-get install -y \
 	wget bzip2
 
-RUN /build.sh x86
+RUN /build.sh
 
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
