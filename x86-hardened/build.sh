@@ -1,5 +1,5 @@
 suffix=hardened # $3
-arch=i686  $1
+arch=i686  #$1
 =======
 suffix=hardened
 arch=$1
