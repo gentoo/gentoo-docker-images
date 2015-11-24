@@ -1,0 +1,50 @@
+box: wercker-labs/docker
+build:
+  steps:
+    - script:
+        name: fix timestamps
+        code: |
+          sudo wget https://gist.githubusercontent.com/davidwindell/fbfef588c6295666c6a1/raw/c2870b13a50a7aeb4aed1e6eb4daec3a905a7fc0/git-timestamp.sh -O /usr/local/bin/git-timestamp
+          sudo chmod +x /usr/local/bin/git-timestamp
+          git-timestamp composer.json
+          git-timestamp composer.lock
+          git-timestamp public/assets/js/bower.json
+          git-timestamp public/assets/js/package.json
+    - script:
+        name: login to quay.io
+        code: docker login -e none -u \$token -p $QUAY_TOKEN quay.io
+    - script:
+        name: restore last build
+        code: docker pull quay.io/username/repo:latest
+    - script:
+        name: build image and run unit tests
+        code: docker build -t quay.io/username/repo .
+    - script:
+        name: test container
+        code: |
+          docker run -d -p 80:80 quay.io/username/repo
+          sleep 15
+          curl --retry 10 --retry-delay 5 -L -I http://localhost:80
+    - script:
+        name: push image
+        code: |
+          docker tag quay.io/username/repo quay.io/username/repo:$WERCKER_GIT_COMMIT
+          docker push quay.io/username/repo
+deploy:
+  steps:
+    - script:
+        name: install aws cli tools
+        code: |
+          sudo apt-get install python-pip zip -y
+          sudo pip install awscli
+    - script:
+        name: add new version to elastic beanstalk
+        code: |
+          RELEASE_FILE=$WERCKER_GIT_COMMIT.zip
+          sed "s/<TAG>/$WERCKER_GIT_COMMIT/" < Dockerrun.aws.json.dist > Dockerrun.aws.json
+          zip -r $RELEASE_FILE Dockerrun.aws.json .ebextensions
+          aws s3 cp $RELEASE_FILE s3://$BEANSTALK_APPLICATION/$RELEASE_FILE
+          aws elasticbeanstalk create-application-version --application-name $BEANSTALK_APPLICATION --version-label $WERCKER_GIT_COMMIT --source-bundle S3Bucket=$BEANSTALK_APPLICATION,S3Key=$RELEASE_FILE
+    - script:
+        name: deploy new version
+        code: aws elasticbeanstalk update-environment --environment-name $BEANSTALK_ENVIRONMENT --version-label $WERCKER_GIT_COMMIT
