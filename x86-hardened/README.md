@@ -1,2 +1,2 @@
 # Docker Base Gentoo package
-Here is my Gentoo stage3 docker package.
+Here is my Gentoo Hardend stage3 docker package.
