@@ -1,0 +1,4 @@
+Update:
+run chroot.sh
+  run update.sh in /root/ when chrooted
+run makedist.sh
