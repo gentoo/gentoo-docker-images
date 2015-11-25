@@ -8,12 +8,10 @@
 
 # Docker Base Gentoo package
 Here is my Gentoo Hardend stage3 docker package.
-<code>
-FROM scratch MAINTAINER Necrose99 necrose99@protonmail.net 
-
-ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686/hardened/stage3-i686-hardened-20151124.tar.bz2 /
-
-CMD ["/bin/bash"]
-</code>
+<p>
+<b>FROM scratch MAINTAINER Necrose99 necrose99@protonmail.net 
+<br>ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686/hardened/stage3-i686-hardened-20151124.tar.bz2 /
+<br>CMD ["/bin/bash"]
+</code></p>
 **Linked Repositories:
 gentoo/portage**
