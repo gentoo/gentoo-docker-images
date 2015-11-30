@@ -27,7 +27,7 @@ RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
 RUN rm /portage-latest.tar.bz2
 
 #Add Layman
-Run emerge --sync 
+Run emerge-webrsync -q 
 Run Emerge -v sys-fs/squashfs-tools app-arch/p7zip 
 RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
 Run Emerge -v git layman potage
