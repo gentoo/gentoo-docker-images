@@ -12,10 +12,7 @@ rm -f $(basename ${stage3})
 #Add portage
 wget -q -c  http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
 bzcat /newWorldOrder/portage-latest.tar.bz2 | tar -xf - -C /newWorldOrder/usr
-mkdir -p usr/portage/distfiles usr/portage/metadata /usr/portage/packages
-wget -O poweriso-1.3.tar.gz http://goo.gl/p8Tzc
-tar -xzvf poweriso-1.3.tar.gz -C /usr/local/bin
-chmod +x /usr/local/bin/poweriso
+mkdir -p usr/newWorldOrder/portage/distfiles usr/portage/metadata /usr/portage/packages
 #Busy Box
 wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${busybox_version}"
 chmod +x /busybox
