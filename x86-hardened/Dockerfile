@@ -1,7 +1,9 @@
 FROM scratch
 MAINTAINER Necrose99 necrose99@protonmail.net
 ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686/hardened/stage3-i686-hardened-20151124.tar.bz2 /
-CMD ["/bin/bash"]
+RUN ["/bin/bash"]
+RUN env-update
+RUN source /etc/profile 
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
 
@@ -29,3 +31,4 @@ Run emerge --sync
 Run Emerge -v sys-fs/squashfs-tools app-arch/p7zip 
 RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
 Run Emerge -v git layman potage
+CMD ["/bin/bash"]
