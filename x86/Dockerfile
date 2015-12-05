@@ -1,7 +1,7 @@
 FROM 32bit/debian:jessie
 
 MAINTAINER Gentoo Docker Team
-
+VOLUME ["${PORTAGE}:/usr/portage:rw", "${PORTAGE}/distfiles:/usr/portage/distfiles:rw"] 
 #ADD http://www.busybox.net/downloads/binaries/latest/busybox-i686 /busybox
 
 # This one should be present by running the build.sh script
@@ -27,5 +27,3 @@ RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 
 # By default, UTC system
 RUN echo 'UTC' > /etc/timezone
-
-VOLUME ["${PORTAGE}:/usr/portage:rw", "${PORTAGE}/distfiles:/usr/portage/distfiles:rw"] 
