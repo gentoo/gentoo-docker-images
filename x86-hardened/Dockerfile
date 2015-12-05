@@ -23,5 +23,9 @@ RUN echo 'UTC' > /etc/timezone
 
 ADD build.sh /
 RUN /build.sh
+#add more stuff via bash. and or add provisoning stub back.
+ADD build.sh /
+RUN /build.sh
 #add more stuff via bash. and or add provisoning stub back. 
+RUN ["/bin/bash"]
 CMD ["/bin/bash"]
