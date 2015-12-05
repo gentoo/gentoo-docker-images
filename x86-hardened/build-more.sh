@@ -1,7 +1,7 @@
 #Add portage 
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 / 
-bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr 
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
 mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages 
+bunzip2 -c  /portage-latest.tar.bz2 | tar -xf - -C /usr 
 rm /portage-latest.tar.bz2 
 
 #Add Layman
