@@ -32,5 +32,6 @@ ls --color -lah
 #Add Layman
 emerge --sync 
 Emerge -v sys-fs/squashfs-tools app-arch/p7zip 
-emerge -v =dev-lang/python-2* =dev-lang/python-3* 
-Emerge -v git layman potage
+emerge -v git layman potage =dev-lang/python-2.7.*  dev-lang/python
+layman -L && Layman -a pentoo && layman -a sabayon && layman -a sabayon-distro
+emerge >=app-admin/equo-300 >=entropy/entropy-300 >=app-admin/matter-300 >=sys-apps/entropy-server-300.ebuild
