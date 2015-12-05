@@ -1,7 +1,7 @@
 FROM scratch
 MAINTAINER Necrose99 necrose99@protonmail.net
 ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686/hardened/stage3-i686-hardened-20151124.tar.bz2 /
-VOLUME ["${PORTAGE}:/usr/portage:rw", "${PORTAGE}/distfiles:/usr/portage/distfiles:rw"] 
+VOLUME /usr/portage:rw", /usr/portage/distfiles:rw, /usr/portage/distfiles:rw
 
 RUN env-update
 RUN source /etc/profile 
@@ -20,7 +20,6 @@ RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 
 # By default, UTC system
 RUN echo 'UTC' > /etc/timezone
-
 
 ADD build.sh /
 RUN /build.sh
