@@ -1,7 +1,7 @@
 FROM 32bit/debian:jessie
 
 MAINTAINER Gentoo Docker Team
-VOLUME ["${PORTAGE}:/usr/portage:rw", "${PORTAGE}/distfiles:/usr/portage/distfiles:rw"] 
+VOLUME /usr/portage:rw", /usr/portage/distfiles:rw, /usr/portage/distfiles:rw
 #ADD http://www.busybox.net/downloads/binaries/latest/busybox-i686 /busybox
 
 # This one should be present by running the build.sh script
