@@ -1,3 +1,9 @@
+#Add portage 
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 / 
+bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr 
+mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages 
+rm /portage-latest.tar.bz2 
+
 #Add Layman
 mkdir /etc/portage/package.accept_keywords 
 mkdir -p /etc/portage/package.use 
