@@ -22,4 +22,4 @@ layman -L && Layman -a pentoo && layman -a sabayon && layman -a sabayon-distro
 emerge >=app-admin/equo-300 >=entropy/entropy-300 >=app-admin/matter-300 >=sys-apps/entropy-server-300.ebuild
 
 # Self destruct
-rm -f /Dockerfile /build.sh
+rm -f /Dockerfile /build-more.sh
