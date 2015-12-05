@@ -6,7 +6,7 @@ RUN env-update
 RUN source /etc/profile 
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
-VOLUME /usr/portage
+VOLUME ["${PORTAGE}:/usr/portage:rw", "${PORTAGE}/distfiles:/usr/portage/distfiles:rw"] 
 # Setup the rc_sys
 RUN sed -e 's/#rc_sys=""/rc_sys="lxc"/g' -i /etc/rc.conf
 
