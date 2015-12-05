@@ -29,19 +29,3 @@ RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 RUN echo 'UTC' > /etc/timezone
 
 VOLUME ["${PORTAGE}:/usr/portage:rw", "${PORTAGE}/distfiles:/usr/portage/distfiles:rw"] 
- 
-RUN mkdir /etc/portage/package.accept_keywords 
-RUN mkdir -p /etc/portage/package.use 
-# avoid a Python 2 dependency 
-RUN echo 'dev-vcs/git -python' >> /etc/portage/package.use/layman 
-RUN echo 'app-portage/layman ~amd64' >> /etc/portage/package.accept_keywords/layman 
-# required by app-portage/layman-2.1.0-r2 
-# =dev-python/ssl-fetch-0.2.1 ~amd64 
-RUN echo 'dev-python/ssl-fetch ~x86' >> /etc/portage/package.accept_keywords/layman 
- 
- 
-38 RUN emerge -v layman python-2.7.10-r3
-39 RUN eselect news read new 
-40 RUN echo 'source /var/lib/layman/make.conf' >> /etc/portage/make.conf 
-41 RUN sed -i 's/^check_official.*/check_official : no/' /etc/layman/layman.cfg 
-42 RUN layman --fetch 
