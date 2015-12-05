@@ -24,8 +24,6 @@ cd /
 #commit suicide
 /busybox rm -rf newWorldOrder /busybox /build.sh /linuxrc
 
-# Self destruct
-rm -f /Dockerfile /build.sh
 
 echo "Bootstrapped ${stage3} into /:"
 ls --color -lah
@@ -45,3 +43,6 @@ sed -i 's/^check_official.*/check_official : no/' /etc/layman/layman.cfg
 layman --fetch 
 layman -L && Layman -a pentoo && layman -a sabayon && layman -a sabayon-distro
 emerge >=app-admin/equo-300 >=entropy/entropy-300 >=app-admin/matter-300 >=sys-apps/entropy-server-300.ebuild
+
+# Self destruct
+rm -f /Dockerfile /build.sh
