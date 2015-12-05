@@ -1,7 +1,7 @@
 FROM busybox
 
 MAINTAINER Gentoo Docker Team
-
+VOLUME /usr/portage:rw", /usr/portage/distfiles:rw, /usr/portage/distfiles:rw
 # This one should be present by running the build.sh script
 ADD build.sh /
 
