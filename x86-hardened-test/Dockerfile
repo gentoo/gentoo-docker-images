@@ -1,7 +1,7 @@
 FROM 32bit/debian:jessie
 
 MAINTAINER Gentoo Docker Team
-VOLUME /usr/portage:rw", /usr/portage/distfiles:rw, /usr/portage/distfiles:rw
+
 #ADD http://www.busybox.net/downloads/binaries/latest/busybox-i686 /busybox
 
 # This one should be present by running the build.sh script
@@ -10,7 +10,7 @@ ADD build.sh /
 RUN apt-get update && apt-get install -y \
 	wget bzip2
 
-RUN /build.sh x86 i686
+RUN /build.sh x86 i686 -hardened
 
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
@@ -28,5 +28,14 @@ RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 # By default, UTC system
 RUN echo 'UTC' > /etc/timezone
 
-ADD build-more.sh /
-RUN /build-more.sh
+#Add portage
+ADD http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 /
+RUN bzcat /portage-latest.tar.bz2 | tar -xf - -C /usr
+RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages
+RUN rm /portage-latest.tar.bz2
+
+#Add Layman
+Run emerge --sync 
+Run Emerge -v sys-fs/squashfs-tools app-arch/p7zip 
+RUN emerge -v =dev-lang/python-2* =dev-lang/python-3* 
+Run Emerge -v git layman potage

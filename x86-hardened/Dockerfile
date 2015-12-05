@@ -1,17 +1,10 @@
-FROM 32bit/debian:jessie
-
-MAINTAINER Gentoo Docker Team
+FROM scratch
+MAINTAINER Necrose99 necrose99@protonmail.net
+ADD http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3-i686/hardened/stage3-i686-hardened-20151124.tar.bz2 /
 VOLUME /usr/portage:rw", /usr/portage/distfiles:rw, /usr/portage/distfiles:rw
-#ADD http://www.busybox.net/downloads/binaries/latest/busybox-i686 /busybox
 
-# This one should be present by running the build.sh script
-ADD build.sh /
-
-RUN apt-get update && apt-get install -y \
-	wget bzip2
-
-RUN /build.sh x86 i686
-
+RUN env-update
+RUN source /etc/profile 
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
 
@@ -30,3 +23,6 @@ RUN echo 'UTC' > /etc/timezone
 
 ADD build-more.sh /
 RUN /build-more.sh
+#add more stuff via bash. and or add provisoning stub back. 
+RUN ["/bin/bash"]
+CMD ["/bin/bash"]

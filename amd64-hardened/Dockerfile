@@ -1,7 +1,7 @@
 FROM busybox
 
 MAINTAINER Gentoo Docker Team
-
+VOLUME /usr/portage:rw", /usr/portage/distfiles:rw, /usr/portage/distfiles:rw
 # This one should be present by running the build.sh script
 ADD build.sh /
 
@@ -22,3 +22,5 @@ RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 
 # By default, UTC system
 RUN echo 'UTC' > /etc/timezone
+ADD build-more.sh /
+RUN /build-more.sh
