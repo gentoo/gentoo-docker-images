@@ -21,9 +21,7 @@ RUN ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
 # By default, UTC system
 RUN echo 'UTC' > /etc/timezone
 
-ADD build.sh /
-RUN /build.sh
-#add more stuff via bash. and or add provisoning stub back.
+
 ADD build.sh /
 RUN /build.sh
 #add more stuff via bash. and or add provisoning stub back. 
