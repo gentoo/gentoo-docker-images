@@ -23,7 +23,12 @@ cp /bin/busybox .
 
 echo "Downloading and extracting ${stage3path}..."
 wget -q -c "${dist}/${stage3path}" "${dist}/${stage3path}.DIGESTS"
-if VerifyShaOfStage3 $stage3 "${stage3}.DIGESTS"; then echo "DIGEST sum is okey"; else echo "DIGEST sum is NOT okey"; return 1; fi
+if VerifyShaOfStage3 $stage3 "${stage3}.DIGESTS"; then
+	echo "DIGEST sum is okey";
+else
+	echo "DIGEST sum is NOT okey";
+	return 1;
+fi
 bunzip2 -c ${stage3} | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
 /newWorldOrder/busybox rm -f $stage3
 
