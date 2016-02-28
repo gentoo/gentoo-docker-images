@@ -8,7 +8,7 @@ ADD build.sh /
 RUN /build.sh amd64 x86_64 -hardened+nomultilib
 
 # Setup the (virtually) current runlevel
-RUN echo "default" > /run/openrc/softlevel
+RUN mkdir -p /run/openrc && echo "default" > /run/openrc/softlevel
 
 # Setup the rc_sys
 RUN sed -e 's/#rc_sys=""/rc_sys="lxc"/g' -i /etc/rc.conf

@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 RUN /build.sh x86 i686
 
 # Setup the (virtually) current runlevel
-RUN echo "default" > /run/openrc/softlevel
+RUN mkdir -p /run/openrc && echo "default" > /run/openrc/softlevel
 
 # Setup the rc_sys
 RUN sed -e 's/#rc_sys=""/rc_sys="lxc"/g' -i /etc/rc.conf
