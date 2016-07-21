@@ -2,13 +2,14 @@ suffix=$3 # e.g. -hardened
 arch=$1
 busybox_version=$2
 dist="http://distfiles.gentoo.org/releases/${arch}/autobuilds/"
-stage3="$(wget -q -O- ${dist}/latest-stage3-${arch}${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
+stage3="$(wget -q -O- ${dist}/latest-stage4-${arch}${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
+# http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage4-amd64-hardened+cloud.txt
 
 mkdir newWorldOrder; cd newWorldOrder
-echo "Downloading and extracting ${stage3}..."
-wget -q -c "${dist}/${stage3}"
-bunzip2 -c $(basename ${stage3}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
-rm -f $(basename ${stage3})
+echo "Downloading and extracting ${stage4}..."
+wget -q -c "${dist}/${stage4}"
+bunzip2 -c $(basename ${stage4}) | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
+rm -f $(basename ${stage4})
 wget -q -O /busybox "http://www.busybox.net/downloads/binaries/latest/busybox-${busybox_version}"
 chmod +x /busybox
 /busybox rm -rf /lib* /usr /var /bin /sbin /opt /mnt /media /root /home /run /tmp
@@ -22,7 +23,7 @@ cd /
 latest_stage3=$(curl "${base_url}/latest-stage3-amd64-hardened.txt" 2>/dev/null | grep -v '#' | awk '{print $1}')
 stage3=$(basename "${latest_stage3}")
 
-echo "Bootstrapped ${stage3} into /:"
+echo "Bootstrapped ${stage4} into /:"
 ls --color -lah
 #Add portage 
 wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 / 
