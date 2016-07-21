@@ -5,8 +5,8 @@ VOLUME /usr/portage:rw", /usr/portage/distfiles:rw, /usr/portage/distfiles:rw
 # This one should be present by running the build.sh script
 ADD build.sh /
 
-RUN /build.sh amd64 x86_64 -hardened
-
+RUN /build.sh amd64 x86_64 -hardened+cloud
+# http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage4-amd64-hardened+cloud.txt
 # Setup the (virtually) current runlevel
 RUN echo "default" > /run/openrc/softlevel
 
