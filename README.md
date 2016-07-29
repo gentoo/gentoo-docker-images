@@ -15,7 +15,7 @@ https://registry.hub.docker.com/u/gentoo/stage3-amd64/
 * portage
 * stage3
   * stage3-amd64
-    * stage3-adm64-hardened
+    * stage3-amd64-hardened
     * stage3-amd64-nomultilib
 
 # Contributing
