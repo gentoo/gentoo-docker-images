@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 RUN /build.sh x86 i686
 
 # Setup the rc_sys
-RUN sed -e 's/#rc_sys=""/rc_sys="lxc"/g' -i /etc/rc.conf
+RUN sed -e 's/#rc_sys=""/rc_sys="docker"/g' -i /etc/rc.conf
 
 # By default, UTC system
 RUN echo 'UTC' > /etc/timezone
