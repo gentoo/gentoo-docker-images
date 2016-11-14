@@ -45,4 +45,3 @@ cd /
 # Say hello
 echo "Bootstrapped ${stage3path} into /:"
 ls --color -lah
-
