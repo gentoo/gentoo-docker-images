@@ -25,8 +25,9 @@ RUN apk add --no-cache gnupg tar wget xz \
  && tar xJpf ${SNAPSHOT} -C usr \
  && rm ${SNAPSHOT} ${SNAPSHOT}.gpgsig ${SNAPSHOT}.md5sum
 
-FROM scratch
+FROM busybox:latest
 
 WORKDIR /
-
 COPY --from=builder /portage/ /
+CMD /bin/true
+VOLUME /usr/portage
