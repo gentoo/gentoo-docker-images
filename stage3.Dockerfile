@@ -7,7 +7,7 @@
 # to fetch the signing key.
 
 
-FROM ${BOOTSTRAP:-alpine:3.5} as builder
+FROM ${BOOTSTRAP:-alpine:3.6} as builder
 
 WORKDIR /gentoo
 
