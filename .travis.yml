@@ -16,7 +16,7 @@ env:
 before_install:
   # Install docker 17.05.0 or later
   - sudo apt-get update -qq
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-engine
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 script:
   - VERSION="$(date -u +%Y%m%d)"
   - sudo ./build.sh
