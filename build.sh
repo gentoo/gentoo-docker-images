@@ -18,7 +18,7 @@ ORG=${ORG:-gentoo}
 # x86 requires the i686 subfolder
 if [[ "${ARCH}" == "x86" ]]; then
 	MICROARCH="i686"
-	BOOTSTRAP="multiarch/alpine:x86-v3.5"
+	BOOTSTRAP="multiarch/alpine:x86-v3.6"
 else
 	MICROARCH="${ARCH}"
 fi
