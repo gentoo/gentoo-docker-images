@@ -6,7 +6,7 @@
 # As gpg keyservers sometimes are unreliable, we use multiple gpg server pools
 # to fetch the signing key.
 
-
+ARG BOOTSTRAP
 FROM ${BOOTSTRAP:-alpine:3.6} as builder
 
 WORKDIR /gentoo
