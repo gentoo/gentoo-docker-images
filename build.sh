@@ -4,6 +4,10 @@
 # TARGET env variable.
 # Example usage: TARGET=stage3-amd64 ./build.sh
 
+if [[ -z "$TARGET" ]]; then
+	echo "TARGET environment variable must be set e.g. TARGET=stage3-amd64."
+	exit 1
+fi
 
 # Split the TARGET variable into three elements separated by hyphens
 IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
