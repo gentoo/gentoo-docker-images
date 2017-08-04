@@ -2,7 +2,7 @@
 
 # Used to create Gentoo stage3 and portage containers simply by specifying a 
 # TARGET env variable.
-# Example usage: TARGET=stage-amd64 ./build.sh
+# Example usage: TARGET=stage3-amd64 ./build.sh
 
 
 # Split the TARGET variable into three elements separated by hyphens
