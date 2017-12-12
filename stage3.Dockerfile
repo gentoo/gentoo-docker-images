@@ -22,6 +22,9 @@ RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${
  && STAGE3PATH="$(wget -q -O- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt" | tail -n 1 | cut -f 1 -d ' ')" \
  && STAGE3="$(basename ${STAGE3PATH})" \
  && wget -q -c "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS" "${DIST}/${STAGE3PATH}.DIGESTS.asc" \
+ && gpg --list-keys \
+ && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
+ && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
  && gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
  || gpg --keyserver keys.gnupg.net --recv-keys ${SIGNING_KEY} \
  || gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys ${SIGNING_KEY} \
