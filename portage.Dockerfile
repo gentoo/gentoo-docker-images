@@ -16,6 +16,9 @@ ARG SIGNING_KEY="0xEC590EEAC9189250"
 
 RUN apk add --no-cache gnupg tar wget xz \
  && wget -q -c "${DIST}/${SNAPSHOT}" "${DIST}/${SNAPSHOT}.gpgsig" "${DIST}/${SNAPSHOT}.md5sum" \
+ && gpg --list-keys \
+ && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
+ && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
  && gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
  && gpg --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" \
  || gpg --keyserver keys.gnupg.net --recv-keys ${SIGNING_KEY} \
