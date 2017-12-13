@@ -19,6 +19,7 @@ RUN apk add --no-cache gnupg tar wget xz \
  && gpg --list-keys \
  && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
+ && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
  && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
  && gpg --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" \
  && md5sum -c ${SNAPSHOT}.md5sum \
