@@ -25,6 +25,7 @@ RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${
  && gpg --list-keys \
  && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
+ && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
  && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
  && gpg --verify "${STAGE3}.DIGESTS.asc" \
  && awk '/# SHA512 HASH/{getline; print}' ${STAGE3}.DIGESTS.asc | sha512sum -c \
