@@ -15,7 +15,7 @@ ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/snapshots"
 ARG SIGNING_KEY="0xEC590EEAC9189250"
 
 RUN apk add --no-cache gnupg tar wget xz \
- && wget -q -c "${DIST}/${SNAPSHOT}" "${DIST}/${SNAPSHOT}.gpgsig" "${DIST}/${SNAPSHOT}.md5sum" \
+ && wget -q "${DIST}/${SNAPSHOT}" "${DIST}/${SNAPSHOT}.gpgsig" "${DIST}/${SNAPSHOT}.md5sum" \
  && gpg --list-keys \
  && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
