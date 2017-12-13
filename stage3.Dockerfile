@@ -14,14 +14,15 @@ WORKDIR /gentoo
 ARG ARCH=amd64
 ARG MICROARCH=amd64
 ARG SUFFIX
-ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/releases/${ARCH}/autobuilds/"
+ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/releases/${ARCH}/autobuilds"
 ARG SIGNING_KEY="0xBB572E0E2D182910"
 
 RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${DIST}" \
  && apk --no-cache add gnupg tar wget \
- && STAGE3PATH="$(wget -q -O- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt" | tail -n 1 | cut -f 1 -d ' ')" \
+ && STAGE3PATH="$(wget -O- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt" | tail -n 1 | cut -f 1 -d ' ')" \
+ && echo "STAGE3PATH:" $STAGE3PATH \
  && STAGE3="$(basename ${STAGE3PATH})" \
- && wget -q -c "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS" "${DIST}/${STAGE3PATH}.DIGESTS.asc" \
+ && wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS" "${DIST}/${STAGE3PATH}.DIGESTS.asc" \
  && gpg --list-keys \
  && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
