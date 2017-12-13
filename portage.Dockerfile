@@ -11,7 +11,7 @@ FROM alpine:3.7 as builder
 WORKDIR /portage
 
 ARG SNAPSHOT="portage-latest.tar.xz"
-ARG DIST="http://distfiles.gentoo.org/snapshots"
+ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/snapshots"
 ARG SIGNING_KEY="0xEC590EEAC9189250"
 
 RUN apk add --no-cache gnupg tar wget xz \
