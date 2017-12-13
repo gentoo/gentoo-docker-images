@@ -19,10 +19,8 @@ RUN apk add --no-cache gnupg tar wget xz \
  && gpg --list-keys \
  && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
- && gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
+ && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
  && gpg --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" \
- || gpg --keyserver keys.gnupg.net --recv-keys ${SIGNING_KEY} \
- || gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys ${SIGNING_KEY} \
  && md5sum -c ${SNAPSHOT}.md5sum \
  && mkdir -p usr/portage/distfiles usr/portage/packages \
  && tar xJpf ${SNAPSHOT} -C usr \
