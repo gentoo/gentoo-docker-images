@@ -37,6 +37,27 @@ docker create -v /usr/portage --name myportagesnapshot gentoo/portage:latest /bi
 docker run --volumes-from myportagesnapshot gentoo/stage3-amd64:latest /bin/bash
 ```
 
+# Using the portage container in a multi-stage build
+
+docker-17.05.0 or later supports multi-stage builds, allowing the portage volume to be used when creating images based on a stage3 image.
+
+Example _Dockerfile_
+
+```
+# name the portage image
+FROM gentoo/portage:latest as portage
+
+# image is based on stage3-amd64
+FROM gentoo/stage3-amd64:latest
+
+# copy the entire portage volume in
+COPY --from=portage /usr/portage /usr/portage
+
+# continue with image build ...
+RUN emerge -qv www-servers/apache # or whichever packages you need
+```
+
+
 # Contributing
 
 We'd love to hear any ideas.  Feel free to contact us via any of the following
