@@ -33,13 +33,15 @@ if [[ -n "${SUFFIX}" ]]; then
 fi
 
 # Load local mirror as DIST
+DISTBUILDARG=''
 if [[ -e /etc/portage/make.conf ]]; then
 	export DIST=`grep 'GENTOO_MIRRORS="' /etc/portage/make.conf|cut -d '"' -f 2|cut -d ' ' -f1`
 	if [[ ${DIST} != "" ]]; then
 		export DIST="${DIST}/releases/${ARCH}/autobuilds"
 		echo "DIST: using locally preferred mirror: '${DIST}'."
 	fi
+	DISTBUILDARG="--build-arg DIST=\"${DIST}\""
 fi
 
-docker build --build-arg ARCH="${ARCH}" --build-arg MICROARCH="${MICROARCH}" --build-arg BOOTSTRAP="${BOOTSTRAP}" --build-arg SUFFIX="${SUFFIX}" --build-arg DIST="${DIST}" -t "${ORG}/${TARGET}:${VERSION}" -f "${NAME}.Dockerfile" .
+docker build --build-arg ARCH="${ARCH}" --build-arg MICROARCH="${MICROARCH}" --build-arg BOOTSTRAP="${BOOTSTRAP}" --build-arg SUFFIX="${SUFFIX}" ${DISTBUILDARG} -t "${ORG}/${TARGET}:${VERSION}" -f "${NAME}.Dockerfile" .
 docker tag "${ORG}/${TARGET}:${VERSION}" "${ORG}/${TARGET}:latest"
