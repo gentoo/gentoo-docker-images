@@ -40,7 +40,7 @@ if [[ -e /etc/portage/make.conf ]]; then
 		export DIST="${DIST}/releases/${ARCH}/autobuilds"
 		echo "DIST: using locally preferred mirror: '${DIST}'."
 	fi
-	DISTBUILDARG="--build-arg DIST=\"${DIST}\""
+	DISTBUILDARG="--build-arg DIST=${DIST}"
 fi
 
 docker build --build-arg ARCH="${ARCH}" --build-arg MICROARCH="${MICROARCH}" --build-arg BOOTSTRAP="${BOOTSTRAP}" --build-arg SUFFIX="${SUFFIX}" ${DISTBUILDARG} -t "${ORG}/${TARGET}:${VERSION}" -f "${NAME}.Dockerfile" .
