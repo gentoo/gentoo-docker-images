@@ -30,6 +30,12 @@ The container being built is defined by the TARGET environment variable:
 
 `` TARGET=stage3-amd64 ./build.sh ``
 
+## Specifying a stage3 mirror
+
+By default the script will import the highest priority Gentoo mirror specified by `GENTOO_MIRRORS` in `/etc/portage/make.conf`, or select a reasonable default. If you want to specify a particular mirror, you can do so as follows:
+
+`` DIST=http://mirror.address.here/gentoo/releases/${ARCH}/autobuilds TARGET=stage3-amd64 ./build.sh ``
+
 # Using the portage container as a data volume
 
 ```
