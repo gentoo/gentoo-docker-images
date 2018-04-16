@@ -28,7 +28,7 @@ script:
 after_success:
   - if [[ "${TRAVIS_PULL_REQUEST_BRANCH:-${TRAVIS_BRANCH}}" == "master" && "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then
     VERSION=$(date -u +%Y%m%d);
-    docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}";
+    echo "${DOCKER_PASSWORD}" | docker login -u="${DOCKER_USERNAME}" --password-stdin;
     docker push "${ORG}/${TARGET}:latest";
     docker push "${ORG}/${TARGET}:${VERSION}";
     fi
