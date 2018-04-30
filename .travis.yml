@@ -1,0 +1,34 @@
+sudo: required
+services: docker
+language: bash
+env:
+  global:
+    - ORG=gentoo
+  matrix:
+    - TARGET=portage
+    - TARGET=stage3-amd64
+    - TARGET=stage3-amd64-hardened
+    - TARGET=stage3-amd64-hardened-nomultilib
+    - TARGET=stage3-amd64-nomultilib
+    - TARGET=stage3-x86
+    - TARGET=stage3-x86-hardened
+
+before_install:
+  # Install docker 17.05.0 or later
+  - sudo apt-get update -qq
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+script:
+  - VERSION="$(date -u +%Y%m%d)"
+  - sudo ./build.sh
+  - if [[ "${TARGET}" == stage* ]]; then 
+    sudo docker run -it --rm ${ORG}/${TARGET}:${VERSION} /bin/bash -c "emerge --info" ;
+    fi
+
+# Travis is set up to push daily to dockerhub
+after_success:
+  - if [[ "${TRAVIS_PULL_REQUEST_BRANCH:-${TRAVIS_BRANCH}}" == "master" && "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then
+    VERSION=$(date -u +%Y%m%d);
+    echo "${DOCKER_PASSWORD}" | docker login -u="${DOCKER_USERNAME}" --password-stdin;
+    docker push "${ORG}/${TARGET}:latest";
+    docker push "${ORG}/${TARGET}:${VERSION}";
+    fi
