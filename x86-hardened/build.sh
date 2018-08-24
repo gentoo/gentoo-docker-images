@@ -1,47 +1,36 @@
-# First param is package tarball, 2nd is the *.DIGEST file
-VerifyShaOfStage3()
-{
-	test_sum=$(awk -v myvar="$1" '$2==myvar {for(i=1; i<=1; i++) { print $1; exit}}' $2)
-	calculated_sum=$(sha512sum $1 | awk '{print $1}' -)
-	if [[ "$test_sum" == "$calculated_sum" ]]; then
-		return 0
-	else
-		return 1
-	fi
-}
+#!/bin/bash
 
-suffix=$3 # e.g. -hardened
-arch=$1
-busybox_version=$2
-dist="http://distfiles.gentoo.org/releases/${arch}/autobuilds/"
-stage3path="$(wget -q -O- ${dist}/latest-stage3-${busybox_version}${suffix}.txt | tail -n 1 | cut -f 1 -d ' ')"
-stage3="$(basename ${stage3path})"
+# Used to create Gentoo stage3 and portage containers simply by specifying a 
+# TARGET env variable.
+# Example usage: TARGET=stage3-amd64 ./build.sh
 
-# Create working directory, keep a copy of busybox handy
-mkdir newWorldOrder; cd newWorldOrder
-cp /bin/busybox .
-
-echo "Downloading and extracting ${stage3path}..."
-wget -q -c "${dist}/${stage3path}" "${dist}/${stage3path}.DIGESTS"
-if VerifyShaOfStage3 $stage3 "${stage3}.DIGESTS"; then
-	echo "DIGEST sum is okey";
-else
-	echo "DIGEST sum is NOT okey";
-	return 1;
+if [[ -z "$TARGET" ]]; then
+	echo "TARGET environment variable must be set e.g. TARGET=stage3-amd64."
+	exit 1
 fi
-bunzip2 -c ${stage3} | tar --exclude "./etc/hosts" --exclude "./sys/*" -xf -
-/newWorldOrder/busybox rm -f $stage3
 
-echo "Installing stage 3"
-/newWorldOrder/busybox rm -rf /lib* /usr /var /bin /sbin /opt /mnt /media /root /home /run /tmp
-/newWorldOrder/busybox cp -fRap lib* /
-/newWorldOrder/busybox cp -fRap bin boot home media mnt opt root run sbin tmp usr var /
-/newWorldOrder/busybox cp -fRap etc/* /etc/
+# Split the TARGET variable into three elements separated by hyphens
+IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
 
-# Cleaning
-cd /
-/newWorldOrder/busybox rm -rf /newWorldOrder /build.sh /linuxrc
+# Ensure upstream directories for stage3-amd64-hardened+nomultilib work
+SUFFIX=${SUFFIX/-/+}
 
-# Say hello
-echo "Bootstrapped ${stage3path} into /:"
-ls --color -lah
+VERSION=${VERSION:-$(date -u +%Y%m%d)}
+
+ORG=${ORG:-gentoo}
+
+# x86 requires the i686 subfolder
+if [[ "${ARCH}" == "x86" ]]; then
+	MICROARCH="i686"
+	BOOTSTRAP="multiarch/alpine:x86-v3.7"
+else
+	MICROARCH="${ARCH}"
+fi
+
+# Prefix the suffix with a hyphen to make sure the URL works
+if [[ -n "${SUFFIX}" ]]; then
+	SUFFIX="-${SUFFIX}"
+fi
+
+docker build --build-arg ARCH="${ARCH}" --build-arg MICROARCH="${MICROARCH}" --build-arg BOOTSTRAP="${BOOTSTRAP}" --build-arg SUFFIX="${SUFFIX}"  -t "${ORG}/${TARGET}:${VERSION}" -f "${NAME}.Dockerfile" .
+docker tag "${ORG}/${TARGET}:${VERSION}" "${ORG}/${TARGET}:latest"
