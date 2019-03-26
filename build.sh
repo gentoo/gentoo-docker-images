@@ -35,8 +35,8 @@ fi
 # Load local mirror as DIST
 DISTBUILDARG=''
 if [[ -e /etc/portage/make.conf ]]; then
-	export DIST=`grep 'GENTOO_MIRRORS="' /etc/portage/make.conf|cut -d '"' -f 2|cut -d ' ' -f1`
-	if [[ ${DIST} != "" ]]; then
+	export DIST=`portageq envvar GENTOO_MIRRORS|cut -d '"' -f 2|cut -d ' ' -f1`
+	if [ ${DIST} ]; then
 		export DIST="${DIST}/releases/${ARCH}/autobuilds"
 		echo "DIST: using locally preferred mirror: '${DIST}'."
 	fi
