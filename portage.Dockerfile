@@ -3,9 +3,6 @@
 # docker-17.05.0 or later. It fetches a daily snapshot from the official 
 # sources and verifies its checksum as well as its gpg signature.
 
-# As gpg keyservers sometimes are unreliable, we use multiple gpg server pools
-# to fetch the signing key.
-
 FROM alpine:3.7 as builder
 
 WORKDIR /portage
@@ -20,7 +17,7 @@ RUN apk add --no-cache gnupg tar wget xz \
  && echo "standard-resolver" >> ~/.gnupg/dirmngr.conf \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
  && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
- && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
+ && gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} \
  && gpg --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" \
  && md5sum -c ${SNAPSHOT}.md5sum \
  && mkdir -p usr/portage/distfiles usr/portage/packages \
