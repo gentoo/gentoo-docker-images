@@ -34,7 +34,7 @@ The container being built is defined by the TARGET environment variable:
 
 ```
 docker create -v /usr/portage --name myportagesnapshot gentoo/portage:latest /bin/true
-docker run --volumes-from myportagesnapshot gentoo/stage3-amd64:latest /bin/bash
+docker run --interactive --tty --volumes-from myportagesnapshot gentoo/stage3-amd64:latest /bin/bash
 ```
 
 # Using the portage container in a multi-stage build
