@@ -23,8 +23,9 @@ RUN apk add --no-cache gnupg tar wget xz \
  && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${SIGNING_KEY} \
  && gpg --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" \
  && md5sum -c ${SNAPSHOT}.md5sum \
- && mkdir -p usr/portage/distfiles usr/portage/packages \
- && tar xJpf ${SNAPSHOT} -C usr \
+ && mkdir -p var/db/repos var/cache/binpkgs var/cache/distfiles \
+ && tar xJpf ${SNAPSHOT} -C var/db/repos \
+ && mv var/db/repos/portage var/db/repos/gentoo \
  && rm ${SNAPSHOT} ${SNAPSHOT}.gpgsig ${SNAPSHOT}.md5sum
 
 FROM busybox:latest
@@ -32,4 +33,4 @@ FROM busybox:latest
 WORKDIR /
 COPY --from=builder /portage/ /
 CMD /bin/true
-VOLUME /usr/portage
+VOLUME /var/db/repos/gentoo
