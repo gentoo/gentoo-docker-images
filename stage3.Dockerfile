@@ -28,7 +28,7 @@ RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${
  && gpg --verify "${STAGE3}.DIGESTS.asc" \
  && awk '/# SHA512 HASH/{getline; print}' ${STAGE3}.DIGESTS.asc | sha512sum -c \
  && tar xpf "${STAGE3}" --xattrs --numeric-owner \
- && sed -i -e 's/#rc_sys=""/rc_sys="docker"/g' etc/rc.conf \
+ && ( sed -i -e 's/#rc_sys=""/rc_sys="docker"/g' etc/rc.conf 2>/dev/null || true ) \
  && echo 'UTC' > etc/timezone \
  && rm ${STAGE3}.DIGESTS.asc ${STAGE3}.CONTENTS ${STAGE3}
 
