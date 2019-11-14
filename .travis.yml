@@ -10,6 +10,7 @@ env:
     - TARGET=stage3-amd64-hardened
     - TARGET=stage3-amd64-hardened-nomultilib
     - TARGET=stage3-amd64-nomultilib
+    - TARGET=stage3-amd64-systemd
     - TARGET=stage3-x86
     - TARGET=stage3-x86-hardened
 
