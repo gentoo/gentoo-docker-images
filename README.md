@@ -18,8 +18,9 @@ https://hub.docker.com/u/gentoo/
 * stage3
   * stage3-amd64
     * stage3-amd64-hardened
-    * stage3-amd64-nomultilib
     * stage3-amd64-hardened-nomultilib
+    * stage3-amd64-nomultilib
+    * stage3-amd64-systemd
   * stage3-x86
     * stage3-x86-hardened
 
