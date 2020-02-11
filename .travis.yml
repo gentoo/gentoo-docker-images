@@ -13,11 +13,18 @@ env:
     - TARGET=stage3-amd64-systemd
     - TARGET=stage3-x86
     - TARGET=stage3-x86-hardened
+    - TARGET=stage3-armv7a
+    - TARGET=stage3-ppc
+    - TARGET=stage3-ppc64
+    - TARGET=stage3-ppc64le
 
 before_install:
   # Install docker 17.05.0 or later
   - sudo apt-get update -qq
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - echo '{"experimental":true}' | sudo tee /etc/docker/daemon.json
+  - sudo apt-get install qemu-user-static binfmt-support
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 script:
   - VERSION="$(date -u +%Y%m%d)"
   - sudo ./build.sh
