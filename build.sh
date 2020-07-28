@@ -24,7 +24,7 @@ ORG=${ORG:-gentoo}
 if [[ "${ARCH}" == "x86" ]]; then
 	DOCKER_ARCH="386"
 	MICROARCH="i686"
-	BOOTSTRAP="multiarch/alpine:x86-v3.7"
+	BOOTSTRAP="multiarch/alpine:x86-v3.11"
 elif [[ "${ARCH}" = ppc* ]]; then
 	MICROARCH="${ARCH}"
 	ARCH=ppc
