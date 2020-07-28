@@ -13,7 +13,6 @@ env:
     - TARGET=stage3-amd64-systemd
     - TARGET=stage3-x86
     - TARGET=stage3-x86-hardened
-    - TARGET=stage3-armv7a
     - TARGET=stage3-ppc
     - TARGET=stage3-ppc64
     - TARGET=stage3-ppc64le
