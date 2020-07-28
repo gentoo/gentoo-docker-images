@@ -14,7 +14,10 @@ IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
 DOCKER_ARCH="${ARCH}"
 
 # Ensure upstream directories for stage3-amd64-hardened+nomultilib work
-SUFFIX=${SUFFIX/-/+}
+# unless we're building for musl targets (vanilla/hardened)
+if [[ "${SUFFIX}" != *musl* ]]; then
+	SUFFIX=${SUFFIX/-/+}
+fi
 
 VERSION=${VERSION:-$(date -u +%Y%m%d)}
 
