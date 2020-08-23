@@ -9,17 +9,21 @@ env:
     - TARGET=stage3-amd64
     - TARGET=stage3-amd64-hardened
     - TARGET=stage3-amd64-hardened-nomultilib
+    - TARGET=stage3-amd64-musl-hardened
+    - TARGET=stage3-amd64-musl-vanilla
     - TARGET=stage3-amd64-nomultilib
     - TARGET=stage3-amd64-systemd
-    - TARGET=stage3-amd64-musl-vanilla
-    - TARGET=stage3-amd64-musl-hardened
-    - TARGET=stage3-x86
-    - TARGET=stage3-x86-hardened
+    - TARGET=stage3-amd64-uclibc-hardened
+    - TARGET=stage3-amd64-uclibc-vanilla
     - TARGET=stage3-armv7a
-    - TARGET=stage3-x86-musl-vanilla
     - TARGET=stage3-ppc
     - TARGET=stage3-ppc64
     - TARGET=stage3-ppc64le
+    - TARGET=stage3-x86
+    - TARGET=stage3-x86-hardened
+    - TARGET=stage3-x86-musl-vanilla
+    - TARGET=stage3-x86-uclibc-hardened
+    - TARGET=stage3-x86-uclibc-vanilla
 
 before_install:
   # Install docker 17.05.0 or later
