@@ -3,7 +3,7 @@
 # docker-17.05.0 or later. It fetches a daily snapshot from the official
 # sources and verifies its checksum as well as its gpg signature.
 
-FROM alpine:3.11 as builder
+FROM --platform=$BUILDPLATFORM alpine:3.11 as builder
 
 WORKDIR /portage
 

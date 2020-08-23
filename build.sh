@@ -11,32 +11,45 @@ fi
 
 # Split the TARGET variable into three elements separated by hyphens
 IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
-DOCKER_ARCH="${ARCH}"
-
-# Ensure upstream directories for stage3-amd64-hardened+nomultilib work
-# unless we're building for musl targets (vanilla/hardened)
-if [[ "${SUFFIX}" != *musl* ]]; then
-	SUFFIX=${SUFFIX/-/+}
-fi
 
 VERSION=${VERSION:-$(date -u +%Y%m%d)}
 
 ORG=${ORG:-gentoo}
 
-# x86 requires the i686 subfolder
-if [[ "${ARCH}" == "x86" ]]; then
-	DOCKER_ARCH="386"
-	MICROARCH="i686"
-	BOOTSTRAP="multiarch/alpine:x86-v3.11"
-elif [[ "${ARCH}" = ppc* ]]; then
-	MICROARCH="${ARCH}"
-	ARCH=ppc
-elif [[ "${ARCH}" = arm* ]]; then
-	DOCKER_ARCH=$(echo $ARCH | sed -e 's-\(v.\).*-/\1-g')
-	MICROARCH="${ARCH}"
-	ARCH=arm
-else
-	MICROARCH="${ARCH}"
+case $ARCH in
+	"amd64" | "arm64")
+		DOCKER_ARCH="${ARCH}"
+		MICROARCH="${ARCH}"
+		;;
+	"armv"*)
+		# armv6j_hardfp -> arm/v6
+		# armv7a_hardfp -> arm/v7
+		DOCKER_ARCH=$(echo "$ARCH" | sed -e 's#arm\(v.\).*#arm/\1#g')
+		MICROARCH="${ARCH}"
+		ARCH="arm"
+		;;
+	"ppc64le")
+		DOCKER_ARCH="${ARCH}"
+		MICROARCH="${ARCH}"
+		ARCH="ppc"
+		;;
+	"s390x")
+		DOCKER_ARCH="${ARCH}"
+		MICROARCH="${ARCH}"
+		ARCH="s390"
+		;;
+	"x86")
+		DOCKER_ARCH="386"
+		MICROARCH="i686"
+		;;
+	*)  # portage
+		DOCKER_ARCH="amd64"
+		;;
+esac
+
+# Handle targets with special characters in the suffix
+if [[ "${TARGET}" == "stage3-amd64-hardened-nomultilib" ]]; then
+	SUFFIX="hardened+nomultilib"
 fi
 
 # Prefix the suffix with a hyphen to make sure the URL works
@@ -44,8 +57,14 @@ if [[ -n "${SUFFIX}" ]]; then
 	SUFFIX="-${SUFFIX}"
 fi
 
-set -x
-docker build --build-arg ARCH="${ARCH}" --build-arg MICROARCH="${MICROARCH}" --build-arg BOOTSTRAP="${BOOTSTRAP}" --build-arg SUFFIX="${SUFFIX}"  -t "${ORG}/${TARGET}:${VERSION}" -f "${NAME}.Dockerfile" .
-docker-copyedit/docker-copyedit.py FROM "${ORG}/${TARGET}:${VERSION}" INTO "${ORG}/${TARGET}:${VERSION}" -vv \
-    set arch ${DOCKER_ARCH}
-docker tag "${ORG}/${TARGET}:${VERSION}" "${ORG}/${TARGET}:latest"
+docker buildx build \
+	--file "${NAME}.Dockerfile" \
+	--build-arg ARCH="${ARCH}" \
+	--build-arg MICROARCH="${MICROARCH}" \
+	--build-arg SUFFIX="${SUFFIX}" \
+	--tag "${ORG}/${TARGET}:latest" \
+	--tag "${ORG}/${TARGET}:${VERSION}" \
+	--platform "linux/${DOCKER_ARCH}" \
+	--progress plain \
+	--load \
+	.

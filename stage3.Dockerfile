@@ -4,7 +4,7 @@
 # sources and verifies its checksum as well as its gpg signature.
 
 ARG BOOTSTRAP
-FROM ${BOOTSTRAP:-alpine:3.11} as builder
+FROM --platform=$BUILDPLATFORM ${BOOTSTRAP:-alpine:3.11} as builder
 
 WORKDIR /gentoo
 
