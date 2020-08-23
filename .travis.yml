@@ -1,46 +1,63 @@
-services: docker
-language: bash
+language: shell
 env:
   global:
+    - DOCKER_CLI_EXPERIMENTAL=enabled  # required by buildx
     - ORG=gentoo
-  matrix:
+  jobs:
     - TARGET=portage
     - TARGET=stage3-amd64
     - TARGET=stage3-amd64-hardened
     - TARGET=stage3-amd64-hardened-nomultilib
+    - TARGET=stage3-amd64-musl-hardened
+    - TARGET=stage3-amd64-musl-vanilla
     - TARGET=stage3-amd64-nomultilib
     - TARGET=stage3-amd64-systemd
-    - TARGET=stage3-amd64-musl-vanilla
-    - TARGET=stage3-amd64-musl-hardened
+    - TARGET=stage3-amd64-uclibc-hardened
+    - TARGET=stage3-amd64-uclibc-vanilla
+    - TARGET=stage3-arm64
+    - TARGET=stage3-arm64-systemd
+    - TARGET=stage3-armv5tel
+    - TARGET=stage3-armv6j_hardfp
+    - TARGET=stage3-armv7a_hardfp
+    - TARGET=stage3-ppc64le
+    - TARGET=stage3-s390x
     - TARGET=stage3-x86
     - TARGET=stage3-x86-hardened
-    - TARGET=stage3-armv7a
     - TARGET=stage3-x86-musl-vanilla
-    - TARGET=stage3-ppc
-    - TARGET=stage3-ppc64
-    - TARGET=stage3-ppc64le
+    - TARGET=stage3-x86-systemd
+    - TARGET=stage3-x86-uclibc-hardened
+    - TARGET=stage3-x86-uclibc-vanilla
 
 before_install:
-  # Install latest Docker
+  # Install latest Docker (>=19.03.0 required by buildx)
+  # https://docs.travis-ci.com/user/docker/#installing-a-newer-docker-version
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   - sudo apt-get update -qq
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-  - echo '{"experimental":true}' | sudo tee /etc/docker/daemon.json
-  - sudo apt-get install qemu-user-static binfmt-support
-  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  - docker info
+before_script:
+  # Create multiarch buildx builder
+  - docker buildx create --driver docker-container --use
 script:
-  - VERSION="$(date -u +%Y%m%d)"
-  - sudo ./build.sh
-  - if [[ "${TARGET}" == stage* ]]; then 
-    sudo docker run -it --rm ${ORG}/${TARGET}:${VERSION} /bin/bash -c "emerge --info" ;
-    fi
-
-# Travis is set up to push daily to dockerhub
+  # Build image
+  - ./build.sh
 after_success:
-  - if [[ "${TRAVIS_PULL_REQUEST_BRANCH:-${TRAVIS_BRANCH}}" == "master" && "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then
-    VERSION=$(date -u +%Y%m%d);
-    echo "${DOCKER_PASSWORD}" | docker login -u="${DOCKER_USERNAME}" --password-stdin;
-    docker push "${ORG}/${TARGET}:latest";
-    docker push "${ORG}/${TARGET}:${VERSION}";
+  # Inspect built image
+  - docker image inspect "${ORG}/${TARGET}:latest"
+  # Run `emerge --info` for stage builds
+  - |
+    if [[ "${TARGET}" == stage* ]]; then
+      # Check if QEMU emulation support is required
+      if [[ ! "${TARGET}" =~ -(amd64|x86)($|-) ]]; then
+        # Enable execution of foreign binary formats (i.e., non-amd64/x86)
+        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      fi
+      docker run --rm "${ORG}/${TARGET}:latest" emerge --info
+    fi
+  # Push all built images to Docker Hub (cron daily task)
+  - |
+    if [[ "${TRAVIS_PULL_REQUEST_BRANCH:-${TRAVIS_BRANCH}}" == "master" && "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then
+      echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+      docker push "${ORG}/${TARGET}"
     fi

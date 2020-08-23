@@ -14,19 +14,58 @@ https://hub.docker.com/u/gentoo/
 
 ## Inventory
 
-* portage
-* stage3
-  * stage3-amd64
-    * stage3-amd64-hardened
-    * stage3-amd64-hardened-nomultilib
-    * stage3-amd64-nomultilib
-    * stage3-amd64-systemd
-  * stage3-x86
-    * stage3-x86-hardened
+The following targets are built by Travis (bold targets are also pushed to Docker Hub):
+ * **`portage`**
+ * `stage3`
+   * `amd64`
+     * **`stage3-amd64`**
+     * **`stage3-amd64-hardened`**
+     * **`stage3-amd64-hardened-nomultilib`**
+     * `stage3-amd64-musl-hardened`
+     * `stage3-amd64-musl-vanilla`
+     * **`stage3-amd64-nomultilib`**
+     * `stage3-amd64-systemd`
+     * `stage3-amd64-uclibc-hardened`
+     * `stage3-amd64-uclibc-vanilla`
+   * `arm64`
+     * `stage3-arm64`
+     * `stage3-arm64-systemd`
+   * `arm`
+     * `stage3-armv5tel`
+     * `stage3-armv6j_hardfp`
+     * `stage3-armv7a_hardfp`
+   * `ppc`
+     * `stage3-ppc64le`
+   * `s390`
+     * `stage3-s390x`
+   * `x86`
+     * **`stage3-x86`**
+     * **`stage3-x86-hardened`**
+     * `stage3-x86-musl-vanilla`
+     * `stage3-x86-systemd`
+     * `stage3-x86-uclibc-hardened`
+     * `stage3-x86-uclibc-vanilla`
+
+The following upstream stage3 targets are not built at all (see [rationale](https://github.com/gentoo/gentoo-docker-images/issues/75#issuecomment-680776939)):
+ * `amd64`
+   * `stage3-amd64-hardened-selinux`
+   * `stage3-amd64-hardened-selinux+nomultilib`
+   * `stage3-x32`
+ * `arm`
+   * `stage3-armv4tl`
+   * `stage3-armv6j`
+   * `stage3-armv7a`
+ * `ppc`
+   * `stage3-ppc`
+   * `stage3-ppc64`
+ * `s390`
+   * `stage3-s390`
+ * `x86`
+   * `stage3-i486`
 
 # Building the containers
 
-The containers are created using a multi-stage build, which requires docker-17.05.0 or later.
+The containers are created using a multi-stage build, which requires Docker >= 19.03.0.
 The container being built is defined by the TARGET environment variable:
 
 `` TARGET=stage3-amd64 ./build.sh ``
