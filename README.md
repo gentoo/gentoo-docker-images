@@ -1,6 +1,6 @@
 # Gentoo Docker Images
 
-[![Build Status](https://travis-ci.org/gentoo/gentoo-docker-images.svg?branch=master)](https://travis-ci.org/gentoo/gentoo-docker-images)
+[![Build Status](https://travis-ci.com/gentoo/gentoo-docker-images.svg?branch=master)](https://travis-ci.com/gentoo/gentoo-docker-images)
 
 A collection of Dockerfiles for generating Gentoo docker images.
 
