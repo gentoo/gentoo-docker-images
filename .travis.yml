@@ -15,7 +15,6 @@ env:
     - TARGET=stage3-amd64-systemd
     - TARGET=stage3-amd64-uclibc-hardened
     - TARGET=stage3-amd64-uclibc-vanilla
-    - TARGET=stage3-armv7a
     - TARGET=stage3-ppc
     - TARGET=stage3-ppc64
     - TARGET=stage3-ppc64le
