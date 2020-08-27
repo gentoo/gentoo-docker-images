@@ -13,6 +13,11 @@ fi
 IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
 
 VERSION=${VERSION:-$(date -u +%Y%m%d)}
+if [[ "${NAME}" == "portage" ]]; then
+	VERSION_SUFFIX=":${VERSION}"
+else
+	VERSION_SUFFIX="-${VERSION}"
+fi
 
 ORG=${ORG:-gentoo}
 
@@ -62,8 +67,9 @@ docker buildx build \
 	--build-arg ARCH="${ARCH}" \
 	--build-arg MICROARCH="${MICROARCH}" \
 	--build-arg SUFFIX="${SUFFIX}" \
-	--tag "${ORG}/${TARGET}:latest" \
-	--tag "${ORG}/${TARGET}:${VERSION}" \
+	--tag "${ORG}/${TARGET/-/:}" \
+	--tag "${ORG}/${TARGET/-/:}${VERSION_SUFFIX}" \
+	${LATEST:+--tag "${ORG}/${NAME}:latest"} \
 	--platform "linux/${DOCKER_ARCH}" \
 	--progress plain \
 	--load \

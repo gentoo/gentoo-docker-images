@@ -14,16 +14,16 @@ https://hub.docker.com/u/gentoo/
 
 ## Inventory
 
-The following targets are built by Travis (bold targets are also pushed to Docker Hub):
- * **`portage`**
+The following targets are built by Travis and pushed to Docker Hub:
+ * `portage`
  * `stage3`
    * `amd64`
-     * **`stage3-amd64`**
-     * **`stage3-amd64-hardened`**
-     * **`stage3-amd64-hardened-nomultilib`**
+     * `stage3-amd64`
+     * `stage3-amd64-hardened`
+     * `stage3-amd64-hardened-nomultilib`
      * `stage3-amd64-musl-hardened`
      * `stage3-amd64-musl-vanilla`
-     * **`stage3-amd64-nomultilib`**
+     * `stage3-amd64-nomultilib`
      * `stage3-amd64-systemd`
      * `stage3-amd64-uclibc-hardened`
      * `stage3-amd64-uclibc-vanilla`
@@ -39,8 +39,8 @@ The following targets are built by Travis (bold targets are also pushed to Docke
    * `s390`
      * `stage3-s390x`
    * `x86`
-     * **`stage3-x86`**
-     * **`stage3-x86-hardened`**
+     * `stage3-x86`
+     * `stage3-x86-hardened`
      * `stage3-x86-musl-vanilla`
      * `stage3-x86-systemd`
      * `stage3-x86-uclibc-hardened`
