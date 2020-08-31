@@ -5,7 +5,7 @@ env:
     - ORG=gentoo
   jobs:
     - TARGET=portage
-    - TARGET=stage3-amd64 LATEST=true
+    - TARGET=stage3-amd64
     - TARGET=stage3-amd64-hardened
     - TARGET=stage3-amd64-hardened-nomultilib
     - TARGET=stage3-amd64-musl-hardened
@@ -55,10 +55,10 @@ after_success:
       fi
       docker run --rm "${ORG}/${TARGET/-/:}" emerge --info
     fi
-  # Push all built images to Docker Hub (cron daily task)
-  - |
-    if [[ "${TRAVIS_PULL_REQUEST_BRANCH:-${TRAVIS_BRANCH}}" == "master" && "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then
-      echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-      REPO="$(cut -d '-' -f 1 <<< ${TARGET})"
-      docker push "${ORG}/${REPO}"
-    fi
+deploy:
+  # Push to Docker Hub (daily cron job)
+  - provider: script
+    script: ./deploy.sh
+    on:
+      branch: master
+      condition: $TRAVIS_EVENT_TYPE = cron
