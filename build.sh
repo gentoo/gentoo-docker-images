@@ -69,7 +69,6 @@ docker buildx build \
 	--build-arg SUFFIX="${SUFFIX}" \
 	--tag "${ORG}/${TARGET/-/:}" \
 	--tag "${ORG}/${TARGET/-/:}${VERSION_SUFFIX}" \
-	${LATEST:+--tag "${ORG}/${NAME}:latest"} \
 	--platform "linux/${DOCKER_ARCH}" \
 	--progress plain \
 	--load \
