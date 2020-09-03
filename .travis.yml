@@ -60,4 +60,7 @@ after_success:
     if [[ "${TRAVIS_PULL_REQUEST_BRANCH:-${TRAVIS_BRANCH}}" == "master" && "${TRAVIS_EVENT_TYPE}" == "cron" ]]; then
       echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
       docker push "${ORG}/${TARGET}"
+      echo "${GITHUB_TOKEN}" | docker login ghcr.io -u "${GITHUB_USERNAME}" --password-stdin
+      docker tag docker.io/${ORG}/${TARGET}:latest ghcr.io/${ORG}/${TARGET}:latest
+      docker push ghcr.io/${ORG}/${TARGET}:latest
     fi
