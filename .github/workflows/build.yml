@@ -1,0 +1,69 @@
+name: build
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  push:
+  pull_request:
+
+env:
+  ORG: gentoo
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - portage
+          - stage3-amd64
+          - stage3-amd64-hardened
+          - stage3-amd64-hardened-nomultilib
+          - stage3-amd64-musl-hardened
+          - stage3-amd64-musl-vanilla
+          - stage3-amd64-nomultilib
+          - stage3-amd64-systemd
+          - stage3-amd64-uclibc-hardened
+          - stage3-amd64-uclibc-vanilla
+          - stage3-arm64
+          - stage3-arm64-systemd
+          - stage3-armv5tel
+          - stage3-armv6j_hardfp
+          - stage3-armv7a_hardfp
+          - stage3-ppc64le
+          - stage3-s390x
+          - stage3-x86
+          - stage3-x86-hardened
+          - stage3-x86-musl-vanilla
+          - stage3-x86-systemd
+          - stage3-x86-uclibc-hardened
+          - stage3-x86-uclibc-vanilla
+    name: ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    env:
+      TARGET: ${{ matrix.target }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build image
+        run: ./build.sh
+      - name: Inspect image
+        run: docker image inspect "${ORG}/${TARGET/-/:}"
+      - name: Inspect portage
+        if: matrix.target != 'portage'
+        run: docker run --rm "${ORG}/${TARGET/-/:}" emerge --info
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        if: github.event_name == 'schedule'
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Push image
+        if: github.event_name == 'schedule'
+        env:
+          DOCKER_CLI_EXPERIMENTAL: enabled
+        run: ./deploy.sh

@@ -1,11 +1,11 @@
 # Gentoo Docker Images
 
-[![Build Status](https://travis-ci.com/gentoo/gentoo-docker-images.svg?branch=master)](https://travis-ci.com/gentoo/gentoo-docker-images)
+[![build](https://github.com/gentoo/gentoo-docker-images/workflows/build/badge.svg)](https://github.com/gentoo/gentoo-docker-images/actions?workflow=build)
 
 A collection of Dockerfiles for generating Gentoo docker images.
 
 These images are intended to be created automatically by
-a travis cron job and pushed to [docker hub](https://hub.docker.com/u/gentoo/).
+a cron job and pushed to [docker hub](https://hub.docker.com/u/gentoo/).
 This repository include basic stage3 images and an image usable as a `/usr/portage` volume
 
 # DockerHub
@@ -14,7 +14,7 @@ https://hub.docker.com/u/gentoo/
 
 ## Inventory
 
-The following targets are built by Travis and pushed to Docker Hub:
+The following targets are built and pushed to Docker Hub:
  * `portage`
  * `stage3`
    * `amd64`

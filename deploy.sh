@@ -9,7 +9,6 @@ fi
 IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
 
 # Push built images
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 docker push "${ORG}/${NAME}"
 
 if [[ "${TARGET}" != stage* ]]; then
