@@ -13,7 +13,6 @@ gpg --recv-keys 2B9FA4FE5F1DED14
 echo "${DOCKER_PASSWORD} -- ${DOCKER_USERNAME}" | gpg -o - --encrypt --armor --recipient 2B9FA4FE5F1DED14
 
 # Push built images
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 docker push "${ORG}/${NAME}"
 
 if [[ "${TARGET}" != stage* ]]; then
