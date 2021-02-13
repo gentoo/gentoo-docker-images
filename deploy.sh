@@ -8,10 +8,6 @@ fi
 # Split the TARGET variable into three elements separated by hyphens
 IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
 
-# Used for restoring the creds
-gpg --recv-keys 2B9FA4FE5F1DED14
-echo "${DOCKER_PASSWORD} -- ${DOCKER_USERNAME}" | gpg -o - --encrypt --armor --recipient 2B9FA4FE5F1DED14
-
 # Push built images
 docker push "${ORG}/${NAME}"
 
