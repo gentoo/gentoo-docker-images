@@ -9,7 +9,7 @@ fi
 IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
 
 # Push built images
-docker push "${ORG}/${NAME}"
+docker push --all-tags "${ORG}/${NAME}"
 
 if [[ "${TARGET}" != stage* ]]; then
 	echo "Done! No manifests to push for TARGET=${TARGET}."
