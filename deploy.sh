@@ -22,10 +22,10 @@ declare -A MANIFEST_ARCHES=(
 	[stage3:latest]="amd64;arm64;armv5tel;armv6j_hardfp;armv7a_hardfp;ppc64le;s390x;x86"
 	[stage3:hardened]="amd64;x86"
 	[stage3:hardened-nomultilib]="amd64"
-	[stage3:musl-hardened]="amd64"
+	[stage3:musl-hardened]="amd64;ppc64le"
 	[stage3:musl-vanilla]="amd64;x86"
 	[stage3:nomultilib]="amd64"
-	[stage3:systemd]="amd64;arm64;x86"
+	[stage3:systemd]="amd64;arm64;x86;ppc64le"
 	[stage3:uclibc-hardened]="amd64;x86"
 	[stage3:uclibc-vanilla]="amd64;x86"
 )
