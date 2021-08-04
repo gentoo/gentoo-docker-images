@@ -16,30 +16,34 @@ jobs:
       matrix:
         target:
           - portage
-          - stage3-amd64
-          - stage3-amd64-hardened
-          - stage3-amd64-hardened-nomultilib
+          - stage3-amd64-hardened-nomultilib-openrc
+          - stage3-amd64-hardened-openrc
+          - stage3-amd64-musl
           - stage3-amd64-musl-hardened
-          - stage3-amd64-musl-vanilla
-          - stage3-amd64-nomultilib
+          - stage3-amd64-nomultilib-openrc
+          - stage3-amd64-nomultilib-systemd
+          - stage3-amd64-openrc
           - stage3-amd64-systemd
-          - stage3-amd64-uclibc-hardened
-          - stage3-amd64-uclibc-vanilla
+          - stage3-armv5tel
+          - stage3-armv5tel-systemd
+          - stage3-armv6j
+          - stage3-armv6j-systemd
+          - stage3-armv6j_hardfp
+          - stage3-armv6j_hardfp-systemd
+          - stage3-armv7a
+          - stage3-armv7a-systemd
+          - stage3-armv7a_hardfp
+          - stage3-armv7a_hardfp-systemd
           - stage3-arm64
           - stage3-arm64-systemd
-          - stage3-armv5tel
-          - stage3-armv6j_hardfp
-          - stage3-armv7a_hardfp
-          - stage3-ppc64le
-          - stage3-ppc64le-musl-hardened
+          - stage3-i686-hardened-openrc
+          - stage3-i686-musl
+          - stage3-i686-openrc
+          - stage3-i686-systemd
+          - stage3-ppc64le-musl-hardened-openrc
+          - stage3-ppc64le-openrc
           - stage3-ppc64le-systemd
           - stage3-s390x
-          - stage3-x86
-          - stage3-x86-hardened
-          - stage3-x86-musl-vanilla
-          - stage3-x86-systemd
-          - stage3-x86-uclibc-hardened
-          - stage3-x86-uclibc-vanilla
     name: ${{ matrix.target }}
     runs-on: ubuntu-latest
     env:
