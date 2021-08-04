@@ -5,7 +5,7 @@
 # Example usage: TARGET=stage3-amd64 ./build.sh
 
 if [[ -z "$TARGET" ]]; then
-	echo "TARGET environment variable must be set e.g. TARGET=stage3-amd64."
+	echo "TARGET environment variable must be set e.g. TARGET=stage3-amd64-openrc."
 	exit 1
 fi
 
@@ -33,6 +33,11 @@ case $ARCH in
 		MICROARCH="${ARCH}"
 		ARCH="arm"
 		;;
+	"i686")
+		DOCKER_ARCH="386"
+		MICROARCH="${ARCH}"
+		ARCH="x86"
+		;;
 	"ppc64le")
 		DOCKER_ARCH="${ARCH}"
 		MICROARCH="${ARCH}"
@@ -43,19 +48,10 @@ case $ARCH in
 		MICROARCH="${ARCH}"
 		ARCH="s390"
 		;;
-	"x86")
-		DOCKER_ARCH="386"
-		MICROARCH="i686"
-		;;
 	*)  # portage
 		DOCKER_ARCH="amd64"
 		;;
 esac
-
-# Handle targets with special characters in the suffix
-if [[ "${TARGET}" == "stage3-amd64-hardened-nomultilib" ]]; then
-	SUFFIX="hardened+nomultilib"
-fi
 
 # Prefix the suffix with a hyphen to make sure the URL works
 if [[ -n "${SUFFIX}" ]]; then
