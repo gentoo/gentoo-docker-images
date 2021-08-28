@@ -139,7 +139,7 @@ RUN emerge -qv www-servers/apache # or whichever packages you need
 We'd love to hear any ideas.  Feel free to contact us via any of the following
 methods:
 
-* IRC: irc://freenode.net/#gentoo-containers
+* IRC: irc://irc.libera.chat:6697/#gentoo-containers
 * EMAIL: gentoo-containers@lists.gentoo.org
 * GITHUB: https://github.com/gentoo/gentoo-docker-images
 
