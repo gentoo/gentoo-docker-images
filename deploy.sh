@@ -16,14 +16,14 @@ ORG=${ORG:-gentoo}
 docker push --all-tags "${ORG}/${NAME}"
 
 declare -A MANIFEST_TAGS=(
-	[stage3:latest]="amd64-openrc;armv5tel;armv6j_hardfp;armv7a_hardfp;arm64;i686-openrc;ppc64le-openrc;s390x"
+	[stage3:latest]="amd64-openrc;armv5tel;armv6j_hardfp;armv7a_hardfp;arm64;i686-openrc;ppc64le-openrc;rv64_lp64d-openrc;s390x"
 	[stage3:hardened]="amd64-hardened-openrc;i686-hardened-openrc"
 	[stage3:hardened-nomultilib]="amd64-hardened-nomultilib-openrc"
 	[stage3:musl]="amd64-musl;i686-musl"
 	[stage3:musl-hardened]="amd64-musl-hardened;ppc64le-musl-hardened-openrc"
 	[stage3:nomultilib]="amd64-nomultilib-openrc"
 	[stage3:nomultilib-systemd]="amd64-nomultilib-systemd"
-	[stage3:systemd]="amd64-systemd;armv5tel-systemd;armv6j_hardfp-systemd;armv7a_hardfp-systemd;arm64-systemd;i686-systemd;ppc64le-systemd"
+	[stage3:systemd]="amd64-systemd;armv5tel-systemd;armv6j_hardfp-systemd;armv7a_hardfp-systemd;arm64-systemd;i686-systemd;ppc64le-systemd;rv64_lp64d-systemd"
 )
 
 # Find latest manifest
