@@ -44,6 +44,11 @@ The following targets are built and pushed to Docker Hub:
      * `stage3-ppc64le-musl-hardened-openrc`
      * `stage3-ppc64le-openrc`
      * `stage3-ppc64le-systemd`
+   * `riscv`
+     * `stage3-rv64_lp64-openrc`
+     * `stage3-rv64_lp64-systemd`
+     * `stage3-rv64_lp64d-openrc`
+     * `stage3-rv64_lp64d-systemd`
    * `s390`
      * `stage3-s390x`
    * `x86`
@@ -82,6 +87,9 @@ The following upstream stage3 targets are not built at all:
    * `stage3-ppc64-systemd` [[unsupported](#unsupported)]
    * `stage3-ppc64le` [[deprecated](#deprecated)]
    * `stage3-ppc64le-musl-hardened` [[deprecated](#deprecated)]
+ * `riscv`
+   * `stage3-rv32_*` [[unsupported](#unsupported)]
+   * `stage3-rv64_multilib` [[under testing](#testing)]
  * `s390`
    * `stage3-s390` [[unsupported](#unsupported)]
  * `x86`
@@ -96,6 +104,8 @@ The following upstream stage3 targets are not built at all:
 <a name="deprecated">[deprecated]</a>: Deprecated stage3 target
 
 <a name="selinux">[selinux]</a>: [SELinux doesn't seem to make sense inside containers](https://serverfault.com/q/757606/)
+
+<a name="testing">[under testing]</a>: Not ready for container. Our arch team is working on testing it
 
 <a name="unsupported">[unsupported]</a>: [Unsupported Docker architecture](https://github.com/docker-library/official-images#architectures-other-than-amd64)
 
