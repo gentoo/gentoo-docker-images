@@ -43,6 +43,12 @@ case $ARCH in
 		MICROARCH="${ARCH}"
 		ARCH="ppc"
 		;;
+	"rv64_"*)
+		# only support riscv64 for now
+		DOCKER_ARCH=riscv64
+		MICROARCH="${ARCH}"
+		ARCH="riscv"
+		;;
 	"s390x")
 		DOCKER_ARCH="${ARCH}"
 		MICROARCH="${ARCH}"
