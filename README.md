@@ -27,15 +27,15 @@ The following targets are built and pushed to Docker Hub:
      * `stage3-amd64-openrc`
      * `stage3-amd64-systemd`
    * `arm`
-     * `stage3-armv5tel`
+     * `stage3-armv5tel-openrc`
      * `stage3-armv5tel-systemd`
-     * `stage3-armv6j`
+     * `stage3-armv6j-openrc`
      * `stage3-armv6j-systemd`
-     * `stage3-armv6j_hardfp`
+     * `stage3-armv6j_hardfp-openrc`
      * `stage3-armv6j_hardfp-systemd`
-     * `stage3-armv7a`
+     * `stage3-armv7a-openrc`
      * `stage3-armv7a-systemd`
-     * `stage3-armv7a_hardfp`
+     * `stage3-armv7a_hardfp-openrc`
      * `stage3-armv7a_hardfp-systemd`
    * `arm64`
      * `stage3-arm64`

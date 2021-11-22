@@ -16,7 +16,7 @@ ORG=${ORG:-gentoo}
 docker push --all-tags "${ORG}/${NAME}"
 
 declare -A MANIFEST_TAGS=(
-	[stage3:latest]="amd64-openrc;armv5tel;armv6j_hardfp;armv7a_hardfp;arm64;i686-openrc;ppc64le-openrc;rv64_lp64d-openrc;s390x"
+	[stage3:latest]="amd64-openrc;armv5tel-openrc;armv6j_hardfp-openrc;armv7a_hardfp-openrc;arm64;i686-openrc;ppc64le-openrc;rv64_lp64d-openrc;s390x"
 	[stage3:hardened]="amd64-hardened-openrc;i686-hardened-openrc"
 	[stage3:hardened-nomultilib]="amd64-hardened-nomultilib-openrc"
 	[stage3:musl]="amd64-musl;i686-musl"
