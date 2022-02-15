@@ -19,17 +19,16 @@ RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${
  && STAGE3PATH="$(wget -O- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt" | tail -n 1 | cut -f 1 -d ' ')" \
  && echo "STAGE3PATH:" $STAGE3PATH \
  && STAGE3="$(basename ${STAGE3PATH})" \
- && wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS.gz" "${DIST}/${STAGE3PATH}.DIGESTS.asc" \
+ && wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS.gz" "${DIST}/${STAGE3PATH}.asc" \
  && gpg --list-keys \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
  && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
  && gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} \
- && gpg --verify "${STAGE3}.DIGESTS.asc" \
- && awk '/# SHA512 HASH/{getline; print}' ${STAGE3}.DIGESTS.asc | sha512sum -c \
+ && gpg --verify "${STAGE3}.asc" \
  && tar xpf "${STAGE3}" --xattrs-include='*.*' --numeric-owner \
  && ( sed -i -e 's/#rc_sys=""/rc_sys="docker"/g' etc/rc.conf 2>/dev/null || true ) \
  && echo 'UTC' > etc/timezone \
- && rm ${STAGE3}.DIGESTS.asc ${STAGE3}.CONTENTS.gz ${STAGE3}
+ && rm ${STAGE3}.asc ${STAGE3}.CONTENTS.gz ${STAGE3}
 
 FROM scratch
 
