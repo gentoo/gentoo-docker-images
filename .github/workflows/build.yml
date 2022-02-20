@@ -36,6 +36,7 @@ jobs:
           - stage3-armv7a_hardfp-openrc
           - stage3-armv7a_hardfp-systemd
           - stage3-arm64
+          - stage3-arm64-musl
           - stage3-arm64-systemd
           - stage3-i686-hardened-openrc
           - stage3-i686-musl
