@@ -40,8 +40,11 @@ The following targets are built and pushed to Docker Hub:
      * `stage3-armv7a_hardfp-openrc`
      * `stage3-armv7a_hardfp-systemd`
    * `arm64`
-     * `stage3-arm64`
+     * `stage3-arm64-desktop-openrc`
+     * `stage3-arm64-desktop-systemd`
      * `stage3-arm64-musl`
+     * `stage3-arm64-musl-hardened`
+     * `stage3-arm64-openrc`
      * `stage3-arm64-systemd`
    * `ppc`
      * `stage3-ppc64le-musl-hardened-openrc`
