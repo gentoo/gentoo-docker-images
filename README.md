@@ -6,7 +6,7 @@ A collection of Dockerfiles for generating Gentoo docker images.
 
 These images are intended to be created automatically by
 a cron job and pushed to [docker hub](https://hub.docker.com/u/gentoo/).
-This repository include basic stage3 images and an image usable as a `/usr/portage` volume
+This repository include basic stage3 images and an image usable as a `/var/db/repos/gentoo` volume
 
 # DockerHub
 
@@ -125,8 +125,8 @@ The container being built is defined by the TARGET environment variable:
 # Using the portage container as a data volume
 
 ```
-docker create -v /usr/portage --name myportagesnapshot gentoo/portage:latest /bin/true
-docker run --interactive --tty --volumes-from myportagesnapshot gentoo/stage3-amd64:latest /bin/bash
+docker create -v /var/db/repos/gentoo --name myportagesnapshot gentoo/portage:latest /bin/true
+docker run --interactive --tty --volumes-from myportagesnapshot gentoo/stage3:latest /bin/bash
 ```
 
 # Using the portage container in a multi-stage build
