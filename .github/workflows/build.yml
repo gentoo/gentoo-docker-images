@@ -53,7 +53,8 @@ jobs:
           - stage3-rv64_lp64-systemd
           - stage3-rv64_lp64d-openrc
           - stage3-rv64_lp64d-systemd
-          - stage3-s390x
+          - stage3-s390x-openrc
+          - stage3-s390x-systemd
     name: ${{ matrix.target }}
     runs-on: ubuntu-latest
     env:
