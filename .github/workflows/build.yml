@@ -25,7 +25,9 @@ jobs:
           - stage3-amd64-openrc
           - stage3-amd64-desktop-openrc
           - stage3-amd64-systemd
+          - stage3-amd64-systemd-mergedusr
           - stage3-amd64-desktop-systemd
+          - stage3-amd64-desktop-systemd-mergedusr
           - stage3-armv5tel-openrc
           - stage3-armv5tel-systemd
           - stage3-armv6j-openrc
