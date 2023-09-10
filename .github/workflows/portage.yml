@@ -1,0 +1,30 @@
+name: portage
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  push:
+  pull_request:
+
+env:
+  ORG: gentoo
+
+jobs:
+  portage:
+    # some boilerplate kept for alignment with build.yml
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - portage
+    name: ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Build ${{ matrix.target }}
+        uses: ./.github/actions/container_build
+        with:
+          target: ${{ matrix.target }}
+          dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
