@@ -16,14 +16,16 @@ ARG SIGNING_KEY="0xBB572E0E2D182910"
 
 RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${DIST}" \
  && apk --no-cache add ca-certificates gnupg tar wget xz \
- && STAGE3PATH="$(wget -O- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt" | tail -n 1 | cut -f 1 -d ' ')" \
- && echo "STAGE3PATH:" $STAGE3PATH \
- && STAGE3="$(basename ${STAGE3PATH})" \
- && wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS.gz" "${DIST}/${STAGE3PATH}.asc" \
  && gpg --list-keys \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
  && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
  && gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} \
+ && wget -q "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt" \
+ && gpg --verify "latest-stage3-${MICROARCH}${SUFFIX}.txt" \
+ && STAGE3PATH="$(sed -n '6p' "latest-stage3-${MICROARCH}${SUFFIX}.txt" | cut -f 1 -d ' ')" \
+ && echo "STAGE3PATH:" ${STAGE3PATH} \
+ && STAGE3="$(basename ${STAGE3PATH})" \
+ && wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS.gz" "${DIST}/${STAGE3PATH}.asc" \
  && gpg --verify "${STAGE3}.asc" \
  && tar xpf "${STAGE3}" --xattrs-include='*.*' --numeric-owner \
  && ( sed -i -e 's/#rc_sys=""/rc_sys="docker"/g' etc/rc.conf 2>/dev/null || true ) \
