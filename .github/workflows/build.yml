@@ -16,7 +16,6 @@ jobs:
       matrix:
         target:
           - python
-          - portage
           - stage3-amd64-hardened-nomultilib-openrc
           - stage3-amd64-hardened-openrc
           - stage3-amd64-musl
