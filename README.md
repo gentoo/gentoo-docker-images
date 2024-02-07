@@ -26,6 +26,7 @@ The following targets are built and pushed to Docker Hub:
      * `stage3-amd64-nomultilib-systemd`
      * `stage3-amd64-openrc`
      * `stage3-amd64-desktop-openrc`
+     * `stage3-amd64-desktop-systemd`
      * `stage3-amd64-systemd`
    * `arm`
      * `stage3-armv5tel-openrc`
