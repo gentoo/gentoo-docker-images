@@ -17,7 +17,7 @@ docker push --all-tags "${ORG}/${NAME}"
 
 declare -A MANIFEST_TAGS=(
 	[stage3:latest]="amd64-openrc;armv5tel-openrc;armv6j_hardfp-openrc;armv7a_hardfp-openrc;arm64-openrc;i686-openrc;ppc64le-openrc;rv64_lp64d-openrc;s390x"
-	[stage3:desktop]="amd64-desktop-openrc;arm64-desktop-openrc"
+	[stage3:desktop]="amd64-desktop-openrc;amd64-desktop-systemd;arm64-desktop-openrc"
 	[stage3:hardened]="amd64-hardened-openrc;i686-hardened-openrc"
 	[stage3:hardened-nomultilib]="amd64-hardened-nomultilib-openrc"
 	[stage3:musl]="amd64-musl;armv7a_hardfp_musl-openrc;arm64-musl;i686-musl"
