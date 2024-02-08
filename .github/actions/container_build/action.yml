@@ -34,12 +34,16 @@ runs:
       run: docker run --rm "${ORG}/${TARGET/-/:}" emerge --info
     - name: Login to DockerHub
       uses: docker/login-action@v2
-      if: github.event_name == 'schedule'
+      if: |
+        github.repository_owner == 'gentoo' &&
+        (github.event_name == 'schedule' || github.event_name == 'push')
       with:
         username: ${{ inputs.dockerhub_username }}
         password: ${{ inputs.dockerhub_password }}
     - name: Push image
-      if: github.event_name == 'schedule'
+      if: |
+        github.repository_owner == 'gentoo' &&
+        (github.event_name == 'schedule' || github.event_name == 'push')
       shell: bash
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
