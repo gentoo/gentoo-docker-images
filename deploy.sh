@@ -23,8 +23,8 @@ declare -A MANIFEST_TAGS=(
 	[stage3:musl]="amd64-musl;armv7a_hardfp_musl-openrc;arm64-musl;i686-musl"
 	[stage3:musl-hardened]="amd64-musl-hardened;arm64-musl-hardened;ppc64le-musl-hardened-openrc"
 	[stage3:nomultilib]="amd64-nomultilib-openrc"
-	[stage3:nomultilib-systemd]="amd64-nomultilib-systemd"
-	[stage3:systemd]="amd64-systemd;armv5tel-systemd;armv6j_hardfp-systemd;armv7a_hardfp-systemd;arm64-systemd;i686-systemd;ppc64le-systemd;rv64_lp64d-systemd"
+	[stage3:nomultilib-systemd]="amd64-nomultilib-systemd-mergedusr"
+	[stage3:systemd]="amd64-systemd-mergedusr;armv5tel-systemd-mergedusr;armv6j_hardfp-systemd-mergedusr;armv7a_hardfp-systemd-mergedusr;arm64-systemd-mergedusr;i686-systemd-mergedusr;ppc64le-systemd-mergedusr;rv64_lp64d-systemd-mergedusr"
 )
 
 # Find latest manifest
