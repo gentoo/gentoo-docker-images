@@ -75,8 +75,6 @@ The following upstream stage3 targets are not built at all:
    * `stage3-amd64-musl-vanilla` [[deprecated](#deprecated)]
    * `stage3-amd64-nomultilib` [[deprecated](#deprecated)]
    * `stage3-amd64-nomultilib-selinux-openrc` [[selinux](#selinux)]
-   * `stage3-amd64-uclibc-hardened` [[deprecated](#deprecated)]
-   * `stage3-amd64-uclibc-vanilla` [[deprecated](#deprecated)]
    * `stage3-x32` [[deprecated](#deprecated), [unsupported](#unsupported)]
    * `stage3-x32-openrc` [[unsupported](#unsupported)]
  * `arm`
@@ -105,8 +103,6 @@ The following upstream stage3 targets are not built at all:
    * `stage3-i686` [[deprecated](#deprecated)]
    * `stage3-i686-hardened` [[deprecated](#deprecated)]
    * `stage3-i686-musl-vanilla` [[deprecated](#deprecated)]
-   * `stage3-i686-uclibc-hardened` [[deprecated](#deprecated)]
-   * `stage3-i686-uclibc-vanilla` [[deprecated](#deprecated)]
 
 <a name="deprecated">[deprecated]</a>: Deprecated stage3 target
 
