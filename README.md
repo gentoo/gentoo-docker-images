@@ -23,48 +23,46 @@ The following targets are built and pushed to Docker Hub:
      * `stage3-amd64-musl`
      * `stage3-amd64-musl-hardened`
      * `stage3-amd64-nomultilib-openrc`
-     * `stage3-amd64-nomultilib-systemd`
+     * `stage3-amd64-nomultilib-systemd-mergedusr`
      * `stage3-amd64-openrc`
      * `stage3-amd64-desktop-openrc`
-     * `stage3-amd64-systemd`
      * `stage3-amd64-systemd-mergedusr`
-     * `stage3-amd64-desktop-systemd`
      * `stage3-amd64-desktop-systemd-mergedusr`
    * `arm`
      * `stage3-armv5tel-openrc`
-     * `stage3-armv5tel-systemd`
+     * `stage3-armv5tel-systemd-mergedusr`
      * `stage3-armv6j-openrc`
-     * `stage3-armv6j-systemd`
+     * `stage3-armv6j-systemd-mergedusr`
      * `stage3-armv6j_hardfp-openrc`
-     * `stage3-armv6j_hardfp-systemd`
+     * `stage3-armv6j_hardfp-systemd-mergedusr`
      * `stage3-armv7a-openrc`
-     * `stage3-armv7a-systemd`
+     * `stage3-armv7a-systemd-mergedusr`
      * `stage3-armv7a_hardfp_musl-openrc`
      * `stage3-armv7a_hardfp-openrc`
-     * `stage3-armv7a_hardfp-systemd`
+     * `stage3-armv7a_hardfp-systemd-mergedusr`
    * `arm64`
      * `stage3-arm64-desktop-openrc`
-     * `stage3-arm64-desktop-systemd`
+     * `stage3-arm64-desktop-systemd-mergedusr`
      * `stage3-arm64-musl`
      * `stage3-arm64-musl-hardened`
      * `stage3-arm64-openrc`
-     * `stage3-arm64-systemd`
+     * `stage3-arm64-systemd-mergedusr`
    * `ppc`
      * `stage3-ppc64le-musl-hardened-openrc`
      * `stage3-ppc64le-openrc`
-     * `stage3-ppc64le-systemd`
+     * `stage3-ppc64le-systemd-mergedusr`
    * `riscv`
      * `stage3-rv64_lp64-openrc`
-     * `stage3-rv64_lp64-systemd`
+     * `stage3-rv64_lp64-systemd-mergedusr`
      * `stage3-rv64_lp64d-openrc`
-     * `stage3-rv64_lp64d-systemd`
+     * `stage3-rv64_lp64d-systemd-mergedusr`
    * `s390`
      * `stage3-s390x`
    * `x86`
      * `stage3-i686-hardened-openrc`
      * `stage3-i686-musl`
      * `stage3-i686-openrc`
-     * `stage3-i686-systemd`
+     * `stage3-i686-systemd-mergedusr`
 
 The following upstream stage3 targets are not built at all:
  * `amd64`
@@ -83,17 +81,17 @@ The following upstream stage3 targets are not built at all:
    * `stage3-x32-openrc` [[unsupported](#unsupported)]
  * `arm`
    * `stage3-armv4tl` [[unsupported](#unsupported)]
-   * `stage3-armv4tl-systemd` [[unsupported](#unsupported)]
+   * `stage3-armv4tl-systemd-mergedusr` [[unsupported](#unsupported)]
  * `ppc`
    * `stage3-power9le-openrc` [[unsupported](#unsupported)]
-   * `stage3-power9le-systemd` [[unsupported](#unsupported)]
+   * `stage3-power9le-systemd-mergedusr` [[unsupported](#unsupported)]
    * `stage3-ppc` [[deprecated](#deprecated), [unsupported](#unsupported)]
    * `stage3-ppc-openrc` [[unsupported](#unsupported)]
    * `stage3-ppc64` [[deprecated](#deprecated), [unsupported](#unsupported)]
    * `stage3-ppc64-musl-hardened` [[deprecated](#deprecated), [unsupported](#unsupported)]
    * `stage3-ppc64-musl-hardened-openrc` [[unsupported](#unsupported)]
    * `stage3-ppc64-openrc` [[unsupported](#unsupported)]
-   * `stage3-ppc64-systemd` [[unsupported](#unsupported)]
+   * `stage3-ppc64-systemd-mergedusr` [[unsupported](#unsupported)]
    * `stage3-ppc64le` [[deprecated](#deprecated)]
    * `stage3-ppc64le-musl-hardened` [[deprecated](#deprecated)]
  * `riscv`
