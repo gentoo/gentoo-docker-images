@@ -19,7 +19,8 @@ RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${
  && gpg --list-keys \
  && echo "honor-http-proxy" >> ~/.gnupg/dirmngr.conf \
  && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
- && gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} \
+ && gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} || \
+	gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org \
  && wget -q "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt" \
  && gpg --verify "latest-stage3-${MICROARCH}${SUFFIX}.txt" \
  && STAGE3PATH="$(sed -n '6p' "latest-stage3-${MICROARCH}${SUFFIX}.txt" | cut -f 1 -d ' ')" \
