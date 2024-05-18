@@ -117,7 +117,7 @@ The following upstream stage3 targets are not built at all:
 The containers are created using a multi-stage build, which requires Docker >= 19.03.0.
 The container being built is defined by the TARGET environment variable:
 
-`` TARGET=stage3-amd64 ./build.sh ``
+`` TARGET=stage3-amd64-openrc ./build.sh ``
 
 # Using the portage container as a data volume
 
