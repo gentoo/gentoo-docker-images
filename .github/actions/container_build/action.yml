@@ -45,6 +45,4 @@ runs:
         github.ref_name == 'master' && github.repository_owner == 'gentoo' &&
         (github.event_name == 'schedule' || github.event_name == 'push')
       shell: bash
-      env:
-        DOCKER_CLI_EXPERIMENTAL: enabled
       run: ./deploy.sh
