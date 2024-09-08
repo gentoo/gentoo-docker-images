@@ -17,7 +17,6 @@ jobs:
       matrix:
         target:
           - python
-          - stage3-amd64-hardened-nomultilib-openrc
           - stage3-amd64-hardened-openrc
           - stage3-amd64-musl
           - stage3-amd64-musl-hardened
