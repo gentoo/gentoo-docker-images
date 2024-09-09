@@ -22,9 +22,6 @@ case "${TARGET}" in
 	"stage3:hardened")
 	    TAGS=("amd64-hardened-openrc" "i686-hardened-openrc")
 		;;
-	"stage3:hardened-nomultilib")
-	    TAGS=("amd64-hardened-nomultilib-openrc")
-		;;
 	"stage3:musl")
 	    TAGS=("amd64-musl" "armv7a_hardfp_musl-openrc" "arm64-musl" "i686-musl")
 		;;

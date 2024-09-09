@@ -79,7 +79,6 @@ jobs:
           - stage3:latest
           - stage3:desktop
           - stage3:hardened
-          - stage3:hardened-nomultilib
           - stage3:musl
           - stage3:musl-hardened
           - stage3:nomultilib
