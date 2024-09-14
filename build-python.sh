@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 NAME=python
 VERSION=${VERSION:-$(date -u +%Y%m%d)}
 VERSION_SUFFIX="-${VERSION}"

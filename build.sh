@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Used to create Gentoo stage3 and portage containers simply by specifying a 
+# Used to create Gentoo stage3 and portage containers simply by specifying a
 # TARGET env variable.
 # Example usage: TARGET=stage3-amd64 ./build.sh
+
+set -e
 
 if [[ -z "$TARGET" ]]; then
 	echo "TARGET environment variable must be set e.g. TARGET=stage3-amd64-openrc."

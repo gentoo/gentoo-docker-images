@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [[ -z "$TARGET" ]]; then
 	echo "TARGET environment variable must be set e.g. TARGET=stage3:latest."
 	exit 1
