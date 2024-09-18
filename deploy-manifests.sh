@@ -24,11 +24,20 @@ case "${TARGET}" in
 	"stage3:hardened")
 	    TAGS=("amd64-hardened-openrc" "i686-hardened-openrc")
 		;;
+	"stage3:llvm")
+	    TAGS=("amd64-llvm-openrc" "arm64-llvm-openrc")
+		;;
+	"stage3:llvm-systemd")
+	    TAGS=("amd64-llvm-systemd" "arm64-llvm-systemd")
+		;;
 	"stage3:musl")
 	    TAGS=("amd64-musl" "armv7a_hardfp_musl-openrc" "arm64-musl" "i686-musl")
 		;;
 	"stage3:musl-hardened")
 	    TAGS=("amd64-musl-hardened" "arm64-musl-hardened" "ppc64le-musl-hardened-openrc")
+		;;
+	"stage3:musl-llvm")
+	    TAGS=("amd64-musl-llvm" "arm64-musl-llvm")
 		;;
 	"stage3:nomultilib")
 	    TAGS=("amd64-nomultilib-openrc")
