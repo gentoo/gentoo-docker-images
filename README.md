@@ -20,8 +20,11 @@ The following targets are built and pushed to Docker Hub:
    * `amd64`
      * `stage3-amd64-hardened-nomultilib-openrc`
      * `stage3-amd64-hardened-openrc`
+     * `stage3-amd64-llvm-openrc`
+     * `stage3-amd64-llvm-systemd`
      * `stage3-amd64-musl`
      * `stage3-amd64-musl-hardened`
+     * `stage3-amd64-musl-llvm`
      * `stage3-amd64-nomultilib-openrc`
      * `stage3-amd64-nomultilib-systemd`
      * `stage3-amd64-openrc`
@@ -43,8 +46,11 @@ The following targets are built and pushed to Docker Hub:
    * `arm64`
      * `stage3-arm64-desktop-openrc`
      * `stage3-arm64-desktop-systemd`
+     * `stage3-arm64-llvm-openrc`
+     * `stage3-arm64-llvm-systemd`
      * `stage3-arm64-musl`
      * `stage3-arm64-musl-hardened`
+     * `stage3-arm64-musl-llvm`
      * `stage3-arm64-openrc`
      * `stage3-arm64-systemd`
    * `ppc`

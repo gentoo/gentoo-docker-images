@@ -18,8 +18,11 @@ jobs:
         target:
           - python
           - stage3-amd64-hardened-openrc
+          - stage3-amd64-llvm-openrc
+          - stage3-amd64-llvm-systemd
           - stage3-amd64-musl
           - stage3-amd64-musl-hardened
+          - stage3-amd64-musl-llvm
           - stage3-amd64-nomultilib-openrc
           - stage3-amd64-nomultilib-systemd
           - stage3-amd64-openrc
@@ -39,8 +42,11 @@ jobs:
           - stage3-armv7a_hardfp-systemd
           - stage3-arm64-desktop-openrc
           - stage3-arm64-desktop-systemd
+          - stage3-arm64-llvm-openrc
+          - stage3-arm64-llvm-systemd
           - stage3-arm64-musl
           - stage3-arm64-musl-hardened
+          - stage3-arm64-musl-llvm
           - stage3-arm64-openrc
           - stage3-arm64-systemd
           - stage3-i686-hardened-openrc
@@ -79,8 +85,11 @@ jobs:
           - stage3:latest
           - stage3:desktop
           - stage3:hardened
+          - stage3:llvm
+          - stage3:llvm-systemd
           - stage3:musl
           - stage3:musl-hardened
+          - stage3:musl-llvm
           - stage3:nomultilib
           - stage3:nomultilib-systemd
           - stage3:systemd
