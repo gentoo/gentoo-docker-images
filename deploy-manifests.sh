@@ -45,6 +45,12 @@ case "${TARGET}" in
 	"stage3:nomultilib-systemd")
 	    TAGS=("amd64-nomultilib-systemd")
 		;;
+	"stage3:ssemath-t64")
+	    TAGS=("i686-ssemath-t64-openrc")
+		;;
+	"stage3:ssemath-t64-systemd")
+	    TAGS=("i686-ssemath-t64-systemd")
+		;;
 	"stage3:systemd")
 	    TAGS=("amd64-systemd" "armv5tel-systemd" "armv6j_hardfp-systemd" "armv7a_hardfp-systemd" "arm64-systemd" "i686-systemd" "ppc64le-systemd" "rv64_lp64d-systemd")
 		;;

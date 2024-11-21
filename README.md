@@ -68,6 +68,8 @@ The following targets are built and pushed to Docker Hub:
      * `stage3-i686-hardened-openrc`
      * `stage3-i686-musl`
      * `stage3-i686-openrc`
+     * `stage3-i686-ssemath-t64-openrc`
+     * `stage3-i686-ssemath-t64-systemd`
      * `stage3-i686-systemd`
 
 The following upstream stage3 targets are not built at all:
