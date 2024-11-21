@@ -53,6 +53,8 @@ jobs:
           - stage3-i686-musl
           - stage3-i686-openrc
           - stage3-i686-systemd
+          - stage3-i686-ssemath-t64-openrc
+          - stage3-i686-ssemath-t64-systemd
           - stage3-ppc64le-musl-hardened-openrc
           - stage3-ppc64le-openrc
           - stage3-ppc64le-systemd
@@ -92,6 +94,8 @@ jobs:
           - stage3:musl-llvm
           - stage3:nomultilib
           - stage3:nomultilib-systemd
+          - stage3:ssemath-t64
+          - stage3:ssemath-t64-systemd
           - stage3:systemd
     name: ${{ matrix.target }}
     runs-on: ubuntu-latest
