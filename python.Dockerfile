@@ -11,8 +11,9 @@ RUN <<-EOF
 
     # configure portage
     echo '*/* ~amd64' >> /etc/portage/package.accept_keywords/base.conf
-    echo '*/* full-stdlib sqlite' >> /etc/portage/package.use/python
-    echo 'dev-vcs/git -perl' >> /etc/portage/package.use/git
+    echo 'dev-lang/python **' >> /etc/portage/package.accept_keywords/python.conf
+    echo '*/* full-stdlib sqlite' >> /etc/portage/package.use/python.conf
+    echo 'dev-vcs/git -perl' >> /etc/portage/package.use/git.conf
 
     # install ::gentoo
     wget --progress=dot:mega -O - https://github.com/gentoo-mirror/gentoo/archive/master.tar.gz | tar -xz
