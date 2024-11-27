@@ -18,7 +18,6 @@ The following targets are built and pushed to Docker Hub:
  * `portage`
  * `stage3`
    * `amd64`
-     * `stage3-amd64-hardened-nomultilib-openrc`
      * `stage3-amd64-hardened-openrc`
      * `stage3-amd64-llvm-openrc`
      * `stage3-amd64-llvm-systemd`
