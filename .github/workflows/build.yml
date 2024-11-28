@@ -97,6 +97,8 @@ jobs:
           - stage3:ssemath-t64
           - stage3:ssemath-t64-systemd
           - stage3:systemd
+          - stage3:t64
+          - stage3:t64-systemd
     name: ${{ matrix.target }}
     runs-on: ubuntu-latest
     steps:
