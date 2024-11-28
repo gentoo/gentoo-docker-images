@@ -40,10 +40,10 @@ case "${TARGET}" in
 	    TAGS=("amd64-musl-llvm" "arm64-musl-llvm")
 		;;
 	"stage3:nomultilib")
-	    TAGS=("amd64-nomultilib-openrc")
+	    TAGS=("amd64-nomultilib-openrc" "armv5tel-openrc" "armv6j_hardfp-openrc" "armv7a_hardfp-openrc" "arm64-openrc" "i686-openrc" "ppc64le-openrc" "rv64_lp64d-openrc" "s390x")
 		;;
 	"stage3:nomultilib-systemd")
-	    TAGS=("amd64-nomultilib-systemd")
+	    TAGS=("amd64-nomultilib-systemd" "armv5tel-systemd" "armv6j_hardfp-systemd" "armv7a_hardfp-systemd" "arm64-systemd" "i686-systemd" "ppc64le-systemd" "rv64_lp64d-systemd")
 		;;
 	"stage3:ssemath-t64")
 	    TAGS=("i686-ssemath-t64-openrc")
