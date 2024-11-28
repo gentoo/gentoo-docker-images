@@ -54,6 +54,12 @@ case "${TARGET}" in
 	"stage3:systemd")
 	    TAGS=("amd64-systemd" "armv5tel-systemd" "armv6j_hardfp-systemd" "armv7a_hardfp-systemd" "arm64-systemd" "i686-systemd" "ppc64le-systemd" "rv64_lp64d-systemd")
 		;;
+	"stage3:t64")
+	    TAGS=("amd64-openrc" "arm64-openrc" "i686-ssemath-t64-openrc" "ppc64le-openrc" "rv64_lp64d-openrc" "s390x")
+		;;
+	"stage3:t64-systemd")
+	    TAGS=("amd64-systemd" "arm64-systemd" "i686-ssemath-t64-systemd" "ppc64le-systemd" "rv64_lp64d-systemd")
+		;;
 	*)
 		echo "Done! No manifests to push for TARGET=${TARGET}."
 	    exit 0
