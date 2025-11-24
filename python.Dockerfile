@@ -21,7 +21,7 @@ RUN <<-EOF
 
     # main job
     emerge -1vnt --jobs dev-python/tox app-arch/lzip dev-lang/rust-bin dev-vcs/git \
-        dev-python/pypy{,3_10}-exe-bin dev-db/sqlite dev-libs/mpdecimal dev-python/uv
+        dev-python/pypy--exe-bin dev-db/sqlite dev-libs/mpdecimal dev-python/uv
     emerge -1v --jobs --nodeps dev-lang/python:{2.7,3.8,3.9,3.10,3.11,3.12,{3.13,3.14}{,t}} \
         dev-lang/pypy:{2.7,3.10}
 
