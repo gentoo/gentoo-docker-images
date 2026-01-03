@@ -18,7 +18,7 @@ runs:
       run: echo "TARGET=${{ inputs.target }}" | tee $GITHUB_ENV
       shell: bash
     - name: Build image
-      if: startswith(inputs.target, 'stage3') || startswith(inputs.target, 'gentoo')
+      if: startswith(inputs.target, 'stage3') || startswith(inputs.target, 'portage')
       shell: bash
       run: ./build.sh
     - name: Build python image
@@ -28,8 +28,8 @@ runs:
     - name: Inspect image
       shell: bash
       run: docker image inspect "${ORG}/${TARGET/-/:}"
-    - name: Inspect gentoo
-      if: matrix.target != 'gentoo'
+    - name: Inspect portage
+      if: matrix.target != 'portage'
       shell: bash
       run: docker run --rm "${ORG}/${TARGET/-/:}" emerge --info
     - name: Login to DockerHub

@@ -1,4 +1,4 @@
-name: gentoo
+name: portage
 
 on:
   schedule:
@@ -10,13 +10,13 @@ env:
   ORG: gentoo
 
 jobs:
-  gentoo:
+  portage:
     # some boilerplate kept for alignment with build.yml
     strategy:
       fail-fast: false
       matrix:
         target:
-          - gentoo
+          - portage
     name: ${{ matrix.target }}
     runs-on: ubuntu-latest
     steps:
