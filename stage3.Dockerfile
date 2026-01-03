@@ -43,7 +43,7 @@ RUN <<-EOF
     echo "STAGE3PATH:" ${STAGE3PATH}
     STAGE3="$(basename ${STAGE3PATH})"
     wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS.gz" "${DIST}/${STAGE3PATH}.asc"
-    gpg --verify "${STAGE3}.asc"
+    gpg --verify "${STAGE3}.asc" "${STAGE3}"
     tar xpf "${STAGE3}" --xattrs-include='*.*' --numeric-owner
 
     # modify stage3
