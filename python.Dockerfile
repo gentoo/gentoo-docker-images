@@ -16,7 +16,7 @@ RUN <<-EOF
     echo 'dev-vcs/git -perl' >> /etc/portage/package.use/git.conf
 
     # install ::gentoo
-    wget --progress=dot:mega -O - https://github.com/gentoo-mirror/gentoo/archive/master.tar.gz | tar -xz
+    wget --progress=dot:mega -O - https://github.com/gentoo-mirror/gentoo/archive/refs/heads/stable.tar.gz | tar -xz
     mv gentoo-master /var/db/repos/gentoo
 
     # main job
