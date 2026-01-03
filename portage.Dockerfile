@@ -7,13 +7,16 @@
 # docker-17.05.0 or later. It fetches a daily snapshot from the official
 # sources and verifies its checksum as well as its gpg signature.
 
-FROM --platform=$BUILDPLATFORM alpine:3.19 as builder
+FROM --platform=$BUILDPLATFORM alpine:3.23 as builder
 
 WORKDIR /portage
 
 ARG SNAPSHOT="portage-latest.tar.xz"
 ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/snapshots"
-ARG SIGNING_KEY="0xEC590EEAC9189250"
+ARG SIGNING_KEY="0xDCD05B71EAB94199527F44ACDB6B8C1F96D8BF6D"
+
+RUN apk --no-cache add bash
+SHELL ["/bin/bash", "-c"]
 
 RUN <<-EOF
     set -e
@@ -31,12 +34,22 @@ RUN <<-EOF
 	GPG
     gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} || \
     	gpg --auto-key-locate=clear,nodefault,wkd --locate-key infrastructure@gentoo.org
-    gpg --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}"
+    gpg --batch --passphrase '' --no-default-keyring --quick-generate-key me@localhost
+    gpg --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
+
+    gpg_temp=$(mktemp -d)
+    gpg --batch --status-fd 3 --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" 3> ${gpg_temp}/gpg.status
+    for token in GOODSIG VALIDSIG TRUST_FULLY; do
+        [[ $'\n'$(<${gpg_temp}/gpg.status) == *$'\n[GNUPG:] '"${token} "* ]] || exit 1
+    done
+
     md5sum -c ${SNAPSHOT}.md5sum
     mkdir -p var/db/repos var/cache/binpkgs var/cache/distfiles
     tar xJpf ${SNAPSHOT} -C var/db/repos
     mv var/db/repos/portage var/db/repos/gentoo
     rm ${SNAPSHOT} ${SNAPSHOT}.gpgsig ${SNAPSHOT}.md5sum
+    rm ${gpg_temp}/gpg.status
+    rmdir ${gpg_temp}
 EOF
 
 FROM busybox:latest
