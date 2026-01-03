@@ -42,14 +42,14 @@ RUN <<-EOF
     gpg --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
 
     # obtain and extract stage3
-    wget -q "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt"
-    gpg --verify "latest-stage3-${MICROARCH}${SUFFIX}.txt"
+    wget -q -- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt"
+    gpg --verify -- "latest-stage3-${MICROARCH}${SUFFIX}.txt"
     STAGE3PATH="$(sed -n '6p' "latest-stage3-${MICROARCH}${SUFFIX}.txt" | cut -f 1 -d ' ')"
     echo "STAGE3PATH:" ${STAGE3PATH}
     STAGE3="$(basename ${STAGE3PATH})"
     wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.asc"
     gpg_temp=$(mktemp -d)
-    gpg --batch --status-fd 3 --verify "${STAGE3}.asc" "${STAGE3}" 3> ${gpg_temp}/gpg.status
+    gpg --batch --status-fd 3 --verify -- "${STAGE3}.asc" "${STAGE3}" 3> ${gpg_temp}/gpg.status
     for token in GOODSIG VALIDSIG TRUST_FULLY; do
         [[ $'\n'$(<${gpg_temp}/gpg.status) == *$'\n[GNUPG:] '"${token} "* ]] || exit 1
     done

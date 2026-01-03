@@ -38,18 +38,18 @@ RUN <<-EOF
     gpg --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
 
     gpg_temp=$(mktemp -d)
-    gpg --batch --status-fd 3 --verify "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" 3> ${gpg_temp}/gpg.status
+    gpg --batch --status-fd 3 --verify -- "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" 3> ${gpg_temp}/gpg.status
     for token in GOODSIG VALIDSIG TRUST_FULLY; do
         [[ $'\n'$(<${gpg_temp}/gpg.status) == *$'\n[GNUPG:] '"${token} "* ]] || exit 1
     done
 
-    md5sum -c ${SNAPSHOT}.md5sum
+    md5sum -c -- ${SNAPSHOT}.md5sum
     mkdir -p var/db/repos var/cache/binpkgs var/cache/distfiles
     tar xJpf ${SNAPSHOT} -C var/db/repos
     mv var/db/repos/portage var/db/repos/gentoo
-    rm ${SNAPSHOT} ${SNAPSHOT}.gpgsig ${SNAPSHOT}.md5sum
-    rm ${gpg_temp}/gpg.status
-    rmdir ${gpg_temp}
+    rm -- ${SNAPSHOT} ${SNAPSHOT}.gpgsig ${SNAPSHOT}.md5sum
+    rm -- ${gpg_temp}/gpg.status
+    rmdir -- ${gpg_temp}
 EOF
 
 FROM busybox:latest
