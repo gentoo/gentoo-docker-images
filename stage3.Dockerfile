@@ -44,7 +44,7 @@ RUN <<-EOF
     # obtain and extract stage3
     wget -q -- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt"
     gpg --batch --output latest.txt --verify -- "latest-stage3-${MICROARCH}${SUFFIX}.txt"
-    STAGE3PATH="$(sed -n '6p' "latest.txt" | cut -f 1 -d ' ')"
+    STAGE3PATH="$(sed -n '3p' "latest.txt" | cut -f 1 -d ' ')"
     echo "STAGE3PATH:" ${STAGE3PATH}
     STAGE3="$(basename ${STAGE3PATH})"
     wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.asc"
