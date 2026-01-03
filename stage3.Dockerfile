@@ -36,14 +36,14 @@ RUN <<-EOF
 	honor-http-proxy
 	disable-ipv6
 	GPG
-    gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} || \
-    	gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
+    gpg --batch --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} || \
+    	gpg --batch --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
     gpg --batch --passphrase '' --no-default-keyring --quick-generate-key me@localhost
-    gpg --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
+    gpg --batch --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
 
     # obtain and extract stage3
     wget -q -- "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt"
-    gpg --verify -- "latest-stage3-${MICROARCH}${SUFFIX}.txt"
+    gpg --batch --verify -- "latest-stage3-${MICROARCH}${SUFFIX}.txt"
     STAGE3PATH="$(sed -n '6p' "latest-stage3-${MICROARCH}${SUFFIX}.txt" | cut -f 1 -d ' ')"
     echo "STAGE3PATH:" ${STAGE3PATH}
     STAGE3="$(basename ${STAGE3PATH})"

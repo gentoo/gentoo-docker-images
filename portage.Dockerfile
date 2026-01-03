@@ -32,10 +32,10 @@ RUN <<-EOF
 	honor-http-proxy
 	disable-ipv6
 	GPG
-    gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} || \
-    	gpg --auto-key-locate=clear,nodefault,wkd --locate-key infrastructure@gentoo.org
+    gpg --batch --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} || \
+    	gpg --batch --auto-key-locate=clear,nodefault,wkd --locate-key infrastructure@gentoo.org
     gpg --batch --passphrase '' --no-default-keyring --quick-generate-key me@localhost
-    gpg --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
+    gpg --batch --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
 
     gpg_temp=$(mktemp -d)
     gpg --batch --status-fd 3 --verify -- "${SNAPSHOT}.gpgsig" "${SNAPSHOT}" 3> ${gpg_temp}/gpg.status
