@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Used to create Gentoo stage3 and portage containers simply by specifying a
+# Used to create Gentoo stage3 and ::gentoo containers simply by specifying a
 # TARGET env variable.
 # Example usage: TARGET=stage3-amd64 ./build.sh
 
@@ -15,7 +15,7 @@ fi
 IFS=- read -r NAME ARCH SUFFIX <<< "${TARGET}"
 
 VERSION=${VERSION:-$(date -u +%Y%m%d)}
-if [[ "${NAME}" == "portage" ]]; then
+if [[ "${NAME}" == "gentoo" ]]; then
 	VERSION_SUFFIX=":${VERSION}"
 else
 	VERSION_SUFFIX="-${VERSION}"
@@ -56,7 +56,7 @@ case $ARCH in
 		MICROARCH="${ARCH}"
 		ARCH="s390"
 		;;
-	*)  # portage
+	*)  # ::gentoo
 		DOCKER_ARCH="amd64"
 		;;
 esac
