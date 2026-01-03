@@ -11,7 +11,7 @@ FROM --platform=$BUILDPLATFORM alpine:3.23 as builder
 
 WORKDIR /portage
 
-ARG SNAPSHOT="portage-latest.tar.xz"
+ARG SNAPSHOT="gentoo-latest.tar.xz"
 ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/snapshots"
 ARG SIGNING_KEY="0xDCD05B71EAB94199527F44ACDB6B8C1F96D8BF6D"
 
@@ -46,7 +46,7 @@ RUN <<-EOF
     md5sum -c -- ${SNAPSHOT}.md5sum
     mkdir -p var/db/repos var/cache/binpkgs var/cache/distfiles
     tar xJpf ${SNAPSHOT} -C var/db/repos
-    mv var/db/repos/portage var/db/repos/gentoo
+    mv var/db/repos/gentoo var/db/repos/gentoo
     rm -- ${SNAPSHOT} ${SNAPSHOT}.gpgsig ${SNAPSHOT}.md5sum
     rm -- ${gpg_temp}/gpg.status
     rmdir -- ${gpg_temp}
