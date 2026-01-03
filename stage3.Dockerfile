@@ -42,7 +42,7 @@ RUN <<-EOF
     STAGE3PATH="$(sed -n '6p' "latest-stage3-${MICROARCH}${SUFFIX}.txt" | cut -f 1 -d ' ')"
     echo "STAGE3PATH:" ${STAGE3PATH}
     STAGE3="$(basename ${STAGE3PATH})"
-    wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.CONTENTS.gz" "${DIST}/${STAGE3PATH}.asc"
+    wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.asc"
     gpg --verify "${STAGE3}.asc" "${STAGE3}"
     tar xpf "${STAGE3}" --xattrs-include='*.*' --numeric-owner
 
@@ -51,7 +51,7 @@ RUN <<-EOF
     echo 'UTC' > etc/timezone
 
     # cleanup
-    rm ${STAGE3}.asc ${STAGE3}.CONTENTS.gz ${STAGE3}
+    rm ${STAGE3}.asc ${STAGE3}
 EOF
 
 FROM scratch
