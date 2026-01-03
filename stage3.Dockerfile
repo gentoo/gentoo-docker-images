@@ -8,7 +8,7 @@
 # sources and verifies its checksum as well as its gpg signature.
 
 ARG BOOTSTRAP
-FROM --platform=$BUILDPLATFORM ${BOOTSTRAP:-alpine:3.19} as builder
+FROM --platform=$BUILDPLATFORM ${BOOTSTRAP:-alpine:3.23} as builder
 
 WORKDIR /gentoo
 
@@ -16,7 +16,10 @@ ARG ARCH=amd64
 ARG MICROARCH=amd64
 ARG SUFFIX
 ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/releases/${ARCH}/autobuilds"
-ARG SIGNING_KEY="0xBB572E0E2D182910"
+ARG SIGNING_KEY="0x13EBBDBEDE7A12775DFDB1BABB572E0E2D182910"
+
+RUN apk --no-cache add bash
+SHELL ["/bin/bash", "-c"]
 
 RUN <<-EOF
     set -e
@@ -35,6 +38,8 @@ RUN <<-EOF
 	GPG
     gpg --keyserver hkps://keys.gentoo.org --recv-keys ${SIGNING_KEY} || \
     	gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
+    gpg --batch --passphrase '' --no-default-keyring --quick-generate-key me@localhost
+    gpg --no-default-keyring --quick-lsign-key ${SIGNING_KEY}
 
     # obtain and extract stage3
     wget -q "${DIST}/latest-stage3-${MICROARCH}${SUFFIX}.txt"
@@ -43,7 +48,11 @@ RUN <<-EOF
     echo "STAGE3PATH:" ${STAGE3PATH}
     STAGE3="$(basename ${STAGE3PATH})"
     wget -q "${DIST}/${STAGE3PATH}" "${DIST}/${STAGE3PATH}.asc"
-    gpg --verify "${STAGE3}.asc" "${STAGE3}"
+    gpg_temp=$(mktemp -d)
+    gpg --batch --status-fd 3 --verify "${STAGE3}.asc" "${STAGE3}" 3> ${gpg_temp}/gpg.status
+    for token in GOODSIG VALIDSIG TRUST_FULLY; do
+        [[ $'\n'$(<${gpg_temp}/gpg.status) == *$'\n[GNUPG:] '"${token} "* ]] || exit 1
+    done
     tar xpf "${STAGE3}" --xattrs-include='*.*' --numeric-owner
 
     # modify stage3
@@ -51,7 +60,8 @@ RUN <<-EOF
     echo 'UTC' > etc/timezone
 
     # cleanup
-    rm ${STAGE3}.asc ${STAGE3}
+    rm "${STAGE3}".asc "${STAGE3}" "${gpg_temp}"/gpg.status
+    rmdir "${gpg_temp}"
 EOF
 
 FROM scratch
