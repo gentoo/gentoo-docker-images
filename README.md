@@ -15,7 +15,7 @@ https://hub.docker.com/u/gentoo/
 ## Inventory
 
 The following targets are built and pushed to Docker Hub:
- * `gentoo` (`::gentoo` repository)
+ * `portage`
  * `stage3`
    * `amd64`
      * `stage3-amd64-hardened-openrc`
