@@ -46,7 +46,7 @@ RUN <<-EOF
     md5sum -c -- ${SNAPSHOT}.md5sum
     mkdir -p var/db/repos var/cache/binpkgs var/cache/distfiles
     tar xJpf ${SNAPSHOT} -C var/db/repos
-    mv var/db/repos/gentoo var/db/repos/gentoo
+    mv var/db/repos/gentoo-* var/db/repos/gentoo
     rm -- ${SNAPSHOT} ${SNAPSHOT}.gpgsig ${SNAPSHOT}.md5sum
     rm -- ${gpg_temp}/gpg.status
     rmdir -- ${gpg_temp}
