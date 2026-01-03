@@ -17,7 +17,7 @@ RUN <<-EOF
 
     # install ::gentoo
     wget --progress=dot:mega -O - https://github.com/gentoo-mirror/gentoo/archive/refs/heads/stable.tar.gz | tar -xz
-    mv gentoo-master /var/db/repos/gentoo
+    mv gentoo-stable /var/db/repos/gentoo
 
     # main job
     emerge -1vnt --jobs dev-python/tox app-arch/lzip dev-lang/rust-bin dev-vcs/git \
