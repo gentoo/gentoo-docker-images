@@ -11,7 +11,7 @@ RUN <<-EOF
 
     # configure portage
     echo '*/* ~amd64' >> /etc/portage/package.accept_keywords/base.conf
-    echo 'dev-lang/python **' >> /etc/portage/package.accept_keywords/python.conf
+    # echo 'dev-lang/python **' >> /etc/portage/package.accept_keywords/python.conf
     echo '*/* full-stdlib sqlite' >> /etc/portage/package.use/python.conf
     echo 'dev-vcs/git -perl' >> /etc/portage/package.use/git.conf
 
