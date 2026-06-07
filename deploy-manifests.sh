@@ -31,13 +31,13 @@ case "${TARGET}" in
 	    TAGS=("amd64-llvm-systemd" "arm64-llvm-systemd")
 		;;
 	"stage3:musl")
-	    TAGS=("amd64-musl" "armv7a_hardfp_musl-openrc" "arm64-musl" "i686-musl")
+	    TAGS=("amd64-musl-openrc" "armv7a_hardfp_musl-openrc" "arm64-musl-openrc" "i686-musl-openrc")
 		;;
 	"stage3:musl-hardened")
-	    TAGS=("amd64-musl-hardened" "arm64-musl-hardened" "ppc64le-musl-hardened-openrc")
+	    TAGS=("amd64-musl-hardened-openrc" "arm64-musl-hardened-openrc" "ppc64le-musl-hardened-openrc")
 		;;
 	"stage3:musl-llvm")
-	    TAGS=("amd64-musl-llvm" "arm64-musl-llvm")
+	    TAGS=("amd64-musl-llvm-openrc" "arm64-musl-llvm-openrc")
 		;;
 	"stage3:nomultilib")
 	    TAGS=("amd64-nomultilib-openrc" "armv5tel-openrc" "armv6j_hardfp-openrc" "armv7a_hardfp-openrc" "arm64-openrc" "i686-openrc" "ppc64le-openrc" "rv64_lp64d-openrc" "s390x")
