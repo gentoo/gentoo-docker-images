@@ -22,7 +22,7 @@ RUN <<-EOF
     set -e
 
     apk add --no-cache ca-certificates gnupg tar wget xz
-    wget -q "${DIST}/${SNAPSHOT}" "${DIST}/${SNAPSHOT}.gpgsig" "${DIST}/${SNAPSHOT}.md5sum"
+    wget -nv "${DIST}/${SNAPSHOT}" "${DIST}/${SNAPSHOT}.gpgsig" "${DIST}/${SNAPSHOT}.md5sum"
 
     # setup GPG
     gpg --list-keys
